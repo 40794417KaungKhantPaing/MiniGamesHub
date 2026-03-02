@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe - Menu</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+
+  <!-- Header / Navigation -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="logo">
+        <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+      </div>
+
+      <div class="nav-buttons" id="navMenu">
+        <a href="../index.html"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i> <span>About</span></a>
+
+        <button type="button" onclick="toggleTheme()">
+          <i class="fa-solid fa-moon"></i> <span>Theme</span>
+        </button>
+
+        <button type="button" onclick="toggleBgm()">
+          <i class="fa-solid fa-volume-high"></i> <span>Sound</span>
+        </button>
+      </div>
+
+      <button class="burger" id="burgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="start-screen">
+
+      <h1 class="game-h1">
+        <i class="fa-solid fa-xmark icon-x"></i>
+        <i class="fa-regular fa-circle icon-o"></i> Tic-Tac-Toe
+      </h1>
+
+      <form action="ticGame.html">
+        <p>Choose your side:</p>
+
+        <div class="side-picker">
+          <input type="radio" name="side" value="X" id="pickX" hidden checked>
+          <label for="pickX" class="side-btn">
+            <i class="fa-solid fa-x"></i>
+          </label>
+
+          <input type="radio" name="side" value="O" id="pickO" hidden>
+          <label for="pickO" class="side-btn">
+            <i class="fa-solid fa-o"></i>
+          </label>
+        </div>
+
+        <p id="selectedHint">Playing as: <b>X</b></p>
+
+        <button type="submit" class="rst-but">
+          <i class="fa-solid fa-play"></i> Start Game
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="settings.html">Settings</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-socials" aria-label="Social links">
+        <a href="https://x.com" target="_blank" title="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/tic.js"></script>
+</body>
+
+</html>

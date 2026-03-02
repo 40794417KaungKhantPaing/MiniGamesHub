@@ -353,8 +353,6 @@ h1 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-
-
 /* GAMES */
 
 .start-screen {
@@ -366,6 +364,8 @@ h1 {
   max-width: 420px;
   margin: 60px auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, .4);
+  position: relative;
+  overflow: hidden;
 }
 
 .start-screen h1 {
@@ -386,7 +386,7 @@ h1 {
 
 /* Red */
 .icon-o {
-  color: #38bdf8;
+  color: #3b82f6;
 }
 
 /* Blue */
@@ -484,6 +484,48 @@ h1 {
 
 
 /* TTT GRID */
+
+
+/* Side Picker Buttons */
+.side-picker {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.side-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;             /* center letter inside button */
+  justify-content: center;
+  align-items: center;
+
+}
+/* When X selected */
+#pickX:checked + label {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* When O selected */
+#pickO:checked + label {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+#selectedHint { font-size: 14px; margin-top: 5px; opacity: 0.8; }
+
 .ttt-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -543,7 +585,7 @@ h1 {
 
 /* ===== KUKU KUBE DEMO ===== */
 .kuku-board.demo {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   opacity: 0.85;
 }
 
@@ -615,57 +657,6 @@ input[type="radio"]:checked+.cat-option {
   transition: transform 0.6s;
 }
 
-.memory-board .cell.flip {
-  transform: rotateY(180deg);
-}
-
-.card-face {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  backface-visibility: hidden;
-  border-radius: 14px;
-}
-
-.front {
-  background: transparent;
-  color: white;
-  font-size: 26px;
-}
-
-.back {
-  transform: rotateY(180deg);
-  background: transparent;
-}
-
-.memory-board .cell.matched {
-  box-shadow: 0 0 18px #22c55e;
-  animation: pop 0.35s ease;
-}
-
-.card-img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-}
-
-@keyframes pop {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.12);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 /* Stats (center) */
 .stats-container {
   display: flex;
@@ -693,6 +684,9 @@ input[type="radio"]:checked+.cat-option {
 .empty {
   background: transparent;
   cursor: default;
+}
+.demo{
+  grid-template-columns:repeat(4,1fr)
 }
 
 /* UI ANIMATIONS */
@@ -766,23 +760,83 @@ button:hover,
 }
 
 /* STATS PAGE */
-.stats-list {
-  display: grid;
-  gap: 10px;
-  margin: 15px 0;
+/* Cards container horizontal */
+.cards-wrapper {
+  display: flex;          /* horizontal layout */
+  gap: 20px;
+  overflow-x: auto;       /* scroll if too many cards for screen */
+  padding: 10px 0;
 }
 
-.stat-row {
+/* Individual card styling */
+.stat-card {
+  flex: 0 0 220px;        /* fixed width for each card */
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Card header */
+.stat-card-header {
   display: flex;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-weight: 500;
-  margin: 4px 0;
-  font-size: 14px;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
+/* Card body - vertical stats */
+.stat-card-body {
+  display: flex;
+  flex-direction: column;   /* stack stats vertically */
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* Wrapper to align label and dropdown neatly */
+.dropdown-wrapper {
+  margin-bottom: 8px;      /* smaller spacing */
+  display: flex;
+  align-items: center;
+  gap: 6px;                /* tighter gap */
+  font-weight: bold;
+  font-size: 13px;         /* slightly smaller font */
+}
+
+/* Compact styled dropdown */
+.styled-dropdown {
+  padding: 4px 8px;        /* smaller padding */
+  border-radius: 6px;      /* slightly smaller corners */
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(14px);
+  font-size: 13px;         /* smaller text */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;        /* prevent it from being too small */
+}
+
+/* Hover & focus effect */
+.styled-dropdown:hover {
+  border-color: #888;
+}
+
+.styled-dropdown:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 3px rgba(74, 144, 226, 0.4);
+}
 
 /* FOOTER */
 .footer {
@@ -790,7 +844,7 @@ button:hover,
   color: var(--text);
   text-align: center;
   padding: 24px 16px;
-  margin-top: 60px;
+  margin-top: 100px;
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
   width: 100%;
 }
@@ -979,68 +1033,9 @@ button:hover,
   }
 }
 
-/* Position the button in the top right of the card */
-.how-to-corner {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 20px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.how-to-corner:hover {
-  background: var(--accent);
-  color: var(--card);
-  transform: rotate(15deg) scale(1.1);
-  box-shadow: 0 0 15px var(--accent);
-}
 
-/* Ensure the start screen can hold the absolute button */
-.start-screen {
-  position: relative;
-  overflow: hidden; /* Keeps the glow effects inside the rounded corners */
-}
 
-/* Side Picker Buttons */
-.side-picker {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 10px 0;
-}
 
-.side-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
 
-#pickX.active { border-color: #ef4444; background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-#pickO.active { border-color: #3b82f6; background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
 
-#selectedHint { font-size: 14px; margin-top: 5px; opacity: 0.8; }
-
-.main-start {
-  margin-top: 25px;
-  padding: 15px 30px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}

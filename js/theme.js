@@ -92,30 +92,17 @@ document.querySelectorAll("#navMenu a, #navMenu button")
     });
   });
 
-
-const blocks = document.querySelectorAll('.block');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show'); // RESET animation
-    }
-  });
-}, {
-  threshold: 0.3
-});
-
-blocks.forEach(block => observer.observe(block));
-function playRandom() {
-  const games = ['tic.html', 'memory.html', 'puzzle.html', 'kuku.html'];
-  const randomGame = games[Math.floor(Math.random() * games.length)];
-  window.location.href = randomGame;
-}
 // Auto update copyright year
 document.addEventListener("DOMContentLoaded", () => {
   const yearSpan = document.getElementById("currentYear");
   const currentYear = new Date().getFullYear();
   yearSpan.textContent = currentYear;
 });
+
+
+// Reset all settings
+function resetSettings() {
+  localStorage.removeItem("theme");
+  localStorage.removeItem("bgmMuted");
+  location.reload();
+}

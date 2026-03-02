@@ -2,157 +2,157 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mini Games Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Games Hub</title>
 
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
-    <audio id="bgm" src="background.mp3" autoplay loop hidden></audio>
+  <audio id="bgm" src="background.mp3" autoplay loop hidden></audio>
 
-    <!-- HEADER -->
-    <header>
-        <nav class="navbar" aria-label="Main navigation">
-            <div class="logo">
-                <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="logo">
+        <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+      </div>
+
+      <div class="nav-buttons" id="navMenu">
+        <a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="../html/settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="../html/about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
+        </button>
+
+        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+        </button>
+      </div>
+
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- GAME GRID SECTION -->
+    <section class="page-wrapper" aria-labelledby="main-heading">
+      <article class="card">
+        <h1 id="main-heading">
+          <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+        </h1>
+
+        <section class="game-grid">
+          <a class="game-tile" href="../html/kuku.html">
+            <img src="./assets/img/kuku.png" alt="Kuku Kube game preview">
+            <div class="game-info">
+              <h3>Kuku Kube</h3>
+              <p>Color speed test</p>
             </div>
+          </a>
 
-            <div class="nav-buttons" id="navMenu">
-                <a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-                <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
-                <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
-
-                <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-                    <i class="fa-solid fa-moon"></i><span>Theme</span>
-                </button>
-
-                <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
-                    <i class="fa-solid fa-volume-high"></i><span>Sound</span>
-                </button>
+          <a class="game-tile" href="../html/tic.html">
+            <img src="./assets/img/tic.png" alt="Tic Tac Toe game preview">
+            <div class="game-info">
+              <h3>Tic Tac Toe</h3>
+              <p>Classic strategy duel</p>
             </div>
+          </a>
 
-            <button class="burger" id="burgerBtn" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </nav>
-    </header>
+          <a class="game-tile" href="../html/memory.html">
+            <img src="./assets/img/memory.png" alt="Memory game preview">
+            <div class="game-info">
+              <h3>Memory Game</h3>
+              <p>Test your brain</p>
+            </div>
+          </a>
 
-    <!-- MAIN CONTENT -->
-    <main>
-
-        <!-- GAME GRID SECTION -->
-        <section class="page-wrapper" aria-labelledby="main-heading">
-            <article class="card">
-                <h1 id="main-heading">
-                    <i class="fa-solid fa-gamepad"></i> Mini Games Hub
-                </h1>
-
-                <section class="game-grid">
-                    <a class="game-tile" href="kuku.html">
-                        <img src="./assets/img/kuku.png" alt="Kuku Kube game preview">
-                        <div class="game-info">
-                            <h3>Kuku Kube</h3>
-                            <p>Color speed test</p>
-                        </div>
-                    </a>
-
-                    <a class="game-tile" href="tic.html">
-                        <img src="./assets/img/tic.png" alt="Tic Tac Toe game preview">
-                        <div class="game-info">
-                            <h3>Tic Tac Toe</h3>
-                            <p>Classic strategy duel</p>
-                        </div>
-                    </a>
-
-                    <a class="game-tile" href="memory.html">
-                        <img src="./assets/img/memory.png" alt="Memory game preview">
-                        <div class="game-info">
-                            <h3>Memory Game</h3>
-                            <p>Test your brain</p>
-                        </div>
-                    </a>
-
-                    <a class="game-tile" href="puzzle.html">
-                        <img src="./assets/img/puzzle.png" alt="Sliding puzzle preview">
-                        <div class="game-info">
-                            <h3>Sliding Puzzle</h3>
-                            <p>Logic challenge</p>
-                        </div>
-                    </a>
-                </section>
-            </article>
+          <a class="game-tile" href="../html/puzzle.html">
+            <img src="./assets/img/puzzle.png" alt="Sliding puzzle preview">
+            <div class="game-info">
+              <h3>Sliding Puzzle</h3>
+              <p>Logic challenge</p>
+            </div>
+          </a>
         </section>
+      </article>
+    </section>
 
-        <!-- FEATURE SECTIONS -->
-        <section class="full-screen-blocks">
+    <!-- FEATURE SECTIONS -->
+    <section class="full-screen-blocks">
 
-            <article class="block">
-                <img src="./assets/img/kuku.png" alt="Kuku Kube game">
-                <div class="text-flow">
-                    <h2><i class="fa-solid fa-bullseye"></i> Featured Game: Kuku Kube</h2>
-                    <p>Spot the odd color before time runs out and test your speed!</p>
-                </div>
-            </article>
-
-            <article class="block reverse">
-                <img src="./assets/img/gaming-tips.png" alt="Gaming tips illustration">
-                <div class="text-flow">
-                    <h2><i class="fa-solid fa-lightbulb"></i> Quick Tips</h2>
-                    <ul>
-                        <li>Tic Tac Toe: Always take the center first.</li>
-                        <li>Memory Game: Focus and remember patterns.</li>
-                        <li>Sliding Puzzle: Plan your moves ahead.</li>
-                        <li>Kuku Kube: Spot differences quickly!</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="block">
-                <img src="./assets/img/random-game.png" alt="Random game generator">
-                <div class="text-flow">
-                    <h2><i class="fa-solid fa-dice"></i> Feeling Lucky?</h2>
-                    <p>Can't decide which game to play? Let us pick one for you!</p>
-                    <button onclick="playRandom()"><i class="fa-solid fa-dice"></i> Play a Random Game!</button>
-                </div>
-            </article>
-
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-content">
-
-            <nav class="footer-links" aria-label="Footer navigation">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="settings.html">Settings</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-
-            <div class="footer-socials" aria-label="Social links">
-                <a href="https://twitter.com/yourprofile" target="_blank" title="Twitter">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-                <a href="https://facebook.com/yourprofile" target="_blank" title="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://instagram.com/yourprofile" target="_blank" title="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </div>
-
-            <p>© <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
-
+      <article class="block">
+        <img src="./assets/img/kuku.png" alt="Kuku Kube game">
+        <div class="text-flow">
+          <h2><i class="fa-solid fa-bullseye"></i> Featured Game: Kuku Kube</h2>
+          <p>Spot the odd color before time runs out and test your speed!</p>
         </div>
-    </footer>
+      </article>
 
-    <script src="./js/theme.js"></script>
+      <article class="block reverse">
+        <img src="./assets/img/gaming-tips.png" alt="Gaming tips illustration">
+        <div class="text-flow">
+          <h2><i class="fa-solid fa-lightbulb"></i> Quick Tips</h2>
+          <ul>
+            <li>Tic Tac Toe: Always take the center first.</li>
+            <li>Memory Game: Focus and remember patterns.</li>
+            <li>Sliding Puzzle: Plan your moves ahead.</li>
+            <li>Kuku Kube: Spot differences quickly!</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="block">
+        <img src="./assets/img/random-game.png" alt="Random game generator">
+        <div class="text-flow">
+          <h2><i class="fa-solid fa-dice"></i> Feeling Lucky?</h2>
+          <p>Can't decide which game to play? Let us pick one for you!</p>
+          <button onclick="playRandom()"><i class="fa-solid fa-dice"></i> Play a Random Game!</button>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="./html/about.html">About</a>
+        <a href="./html/settings.html">Settings</a>
+        <a href="./html/privacy.html">Privacy Policy</a>
+        <a href="./html/contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-socials" aria-label="Social links">
+        <a href="https://x.com" target="_blank" title="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
 
 </body>
 

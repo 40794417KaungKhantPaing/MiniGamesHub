@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Contact | Mini Games Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="logo">
+      <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+    </div>
+
+    <div class="nav-buttons" id="navMenu">
+      <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+      <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+      <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i><span>Theme</span>
+      </button>
+
+      <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+        <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+      </button>
+    </div>
+
+    <button class="burger" id="burgerBtn" aria-label="Open menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-wrapper">
+    <section class="card game-card">
+
+      <header>
+        <h1>Contact</h1>
+        <p style="text-align:center; opacity:.85;">
+          Got feedback, ideas, or found a bug? Let us know!
+        </p>
+      </header>
+
+      <form class="menu">
+
+        <input class="input" type="text" placeholder="Your Name" required>
+        <input class="input" type="email" placeholder="Your Email" required>
+        <textarea class="input" rows="5" placeholder="Your Message" required></textarea>
+
+        <button type="submit">
+          <i class="fa-solid fa-paper-plane"></i>
+          Send Message
+        </button>
+
+        <a href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Home
+        </a>
+
+      </form>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="settings.html">Settings</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-socials" aria-label="Social links">
+        <a href="https://x.com" target="_blank" title="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+</body>
+
+</html>

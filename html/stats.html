@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Game Stats | Mini Games Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="logo">
+        <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+      </div>
+
+      <div class="nav-buttons" id="navMenu">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
+        </button>
+
+        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+        </button>
+      </div>
+
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-wrapper">
+    <article class="card">
+      <h1 id="stats-title">
+        <i class="fa-solid fa-chart-simple"></i> Game Stats
+      </h1>
+
+      <section class="cards-wrapper">
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fa-solid fa-xmark icon-x"></i>
+            <i class="fa-regular fa-circle icon-o"></i>
+            <span>Tic Tac Toe</span>
+          </div>
+          <div class="stat-card-body" id="tttStats">
+            Wins: 0<br>
+            Losses: 0<br>
+            Draws: 0<br>
+            Win Rate: 0%<br>
+            Total Played: 0<br>
+            Last: -- (--)<br>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fa-solid fa-brain icon-brain"></i>
+            <span>Memory Game</span>
+          </div>
+          <div class="stat-card-body">
+            <!-- Styled Dropdown -->
+            <div class="dropdown-wrapper">
+              <label for="memoryCategory">Category:</label>
+              <select id="memoryCategory" class="styled-dropdown">
+                <option value="fruit">FRUIT</option>
+                <option value="geometry">GEOMETRY</option>
+              </select>
+            </div>
+
+            <!-- Stats display -->
+            <div id="memoryStats" class="memory-stats">
+              Best Time: --s<br>
+              Best Moves: --<br>
+              Total Played: 0<br>
+              Last: --s / -- moves
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fa-solid fa-puzzle-piece icon-puzzle"></i>
+            <span>Puzzle Game</span>
+          </div>
+          <div class="stat-card-body" id="puzzleStats">
+            Best Moves: --<br>
+            Total Played: 0<br>
+            Last: -- moves
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <i class="fa-solid fa-border-all icon-grid"></i>
+            <span>Color Guess (Kuku)</span>
+          </div>
+          <div class="stat-card-body" id="kukuStats">
+            Best Score: -- <br>
+            Total Played: 0 <br>
+            Last Score: --
+          </div>
+        </div>
+      </section>
+
+      <div class="menu">
+        <button onclick="resetAllStats()" class="danger-btn" style="background:#ef4444;color:white;" aria-label="Reset all game stats">
+          <i class="fa-solid fa-trash"></i> Reset All Game Stats
+        </button>
+        <a href="settings.html" class="secondary-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back to Settings
+        </a>
+      </div>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="settings.html">Settings</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-socials" aria-label="Social links">
+        <a href="https://x.com" target="_blank" title="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/stats.js"></script>
+
+
+</body>
+
+</html>

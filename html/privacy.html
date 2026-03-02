@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Policy | Mini Games Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="logo">
+      <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+    </div>
+
+    <div class="nav-buttons" id="navMenu">
+      <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+      <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+      <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i><span>Theme</span>
+      </button>
+
+      <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+        <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+      </button>
+    </div>
+
+    <button class="burger" id="burgerBtn" aria-label="Open menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="card">
+
+      <h1><i class="fa-solid fa-user-shield"></i> Privacy Policy</h1>
+
+      <p>
+        Mini Games Hub does not collect, store, or transmit any personal data.
+      </p>
+
+      <p>
+        All game data, preferences, and settings are stored locally in your browser
+        using <strong>localStorage</strong> only.
+      </p>
+
+      <h3><i class="fa-solid fa-database"></i> What we store:</h3>
+      <ul>
+        <li><i class="fa-solid fa-moon"></i> Theme preference</li>
+        <li><i class="fa-solid fa-volume-high"></i> Volume level</li>
+        <li><i class="fa-solid fa-trophy"></i> Game scores & progress</li>
+      </ul>
+
+      <h3><i class="fa-solid fa-ban"></i> What we do NOT store:</h3>
+      <ul>
+        <li><i class="fa-solid fa-user"></i> Personal information</li>
+        <li><i class="fa-solid fa-envelope"></i> Emails</li>
+        <li><i class="fa-solid fa-cookie-bite"></i> Tracking cookies</li>
+        <li><i class="fa-solid fa-chart-line"></i> Analytics data</li>
+      </ul>
+
+      <p>
+        <i class="fa-solid fa-lock"></i> Your privacy is fully respected.
+      </p>
+
+      <div class="menu">
+        <a href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="settings.html">Settings</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer-socials" aria-label="Social links">
+        <a href="https://x.com" target="_blank" title="Twitter">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+
+    </div>
+  </footer>
+  <script src="../js/theme.js"></script>
+</body>
+</html>
