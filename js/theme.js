@@ -100,9 +100,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Reset all settings
-function resetSettings() {
-  localStorage.removeItem("theme");
-  localStorage.removeItem("bgmMuted");
-  location.reload();
-}

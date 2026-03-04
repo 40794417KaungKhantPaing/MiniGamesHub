@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Game - Playing</title>
   <link rel="stylesheet" href="../css/style.css">
@@ -37,10 +38,12 @@
     </nav>
   </header>
 
-  <div class="game-card">
-    <h1><i class="fa-solid fa-brain icon-brain"></i> Memory Game</h1>
+  <main class="game-card">
+    <header>
+      <h1><i class="fa-solid fa-brain icon-brain"></i> Memory Game</h1>
+    </header>
 
-    <div class="top-ui">
+    <section class="top-ui">
       <div class="buttons">
         <button onclick="window.location.replace('memory.html')" class="rst-but">
           <i class="fa-solid fa-arrow-left"></i> Menu
@@ -55,35 +58,35 @@
       <div class="buttons">
         <button id="restartBtn" onclick="reset()" class="rst-but">Restart</button>
       </div>
-    </div>
+    </section>
 
-    <div id="memory" class="board memory-board">
-      
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
-      <div class="cell">?</div>
+    <section id="memory" class="board memory-board" aria-label="Memory game board" role="grid">
+      <!-- Memory cells -->
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+      <div class="cell" role="gridcell">?</div>
+    </section>
 
-    </div>
-     <p id="best" class="score">
+    <p id="best" class="score">
       Best Time: --s | Best Moves: -- | Total Played: -- | Last: --s / -- moves
     </p>
-  </div>
-  <!-- Footer -->
+  </main>
+
   <footer class="footer">
     <div class="footer-content">
       <nav class="footer-links" aria-label="Footer navigation">
@@ -115,7 +118,6 @@
 
   <script src="../js/theme.js"></script>
   <script src="../js/memory.js"></script>
-
 </body>
 
 </html>

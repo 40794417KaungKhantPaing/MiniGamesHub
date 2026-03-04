@@ -14,65 +14,70 @@
 
   <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
 
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="logo">
-      <i class="fa-solid fa-gamepad"></i> Mini Games Hub
-    </div>
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="logo">
+        <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+      </div>
 
-    <div class="nav-buttons" id="navMenu">
-      <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-      <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
-      <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+      <div class="nav-buttons" id="navMenu">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-      <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-        <i class="fa-solid fa-moon"></i><span>Theme</span>
+        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
+        </button>
+
+        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+        </button>
+      </div>
+
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
       </button>
+    </nav>
+  </header>
 
-      <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
-        <i class="fa-solid fa-volume-high"></i><span>Sound</span>
-      </button>
-    </div>
+  <main class="page-wrapper">
+    <article class="card">
+      <header>
+        <h1><i class="fa-solid fa-circle-info"></i> About Mini Games Hub</h1>
+      </header>
 
-    <button class="burger" id="burgerBtn" aria-label="Open menu">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </nav>
+      <section>
+        <p>
+          Mini Games Hub is a fast, fun and lightweight browser-based gaming platform
+          featuring classic and modern mini-games designed for quick entertainment.
+        </p>
 
-  <div class="page-wrapper">
-    <div class="card">
+        <p>
+          This project is fully static, optimized for speed, responsive for mobile,
+          and built using pure HTML, CSS and JavaScript.
+        </p>
+      </section>
 
-      <h1><i class="fa-solid fa-circle-info"></i> About Mini Games Hub</h1>
+      <section>
+        <ul>
+          <li><i class="fa-solid fa-bolt"></i> Fast loading</li>
+          <li><i class="fa-solid fa-mobile-screen"></i> Mobile optimized</li>
+          <li><i class="fa-solid fa-gamepad"></i> Multiple mini-games</li>
+          <li><i class="fa-solid fa-moon"></i> Dark & Light themes</li>
+          <li><i class="fa-solid fa-floppy-disk"></i> Saves your preferences</li>
+        </ul>
+      </section>
 
-      <p>
-        Mini Games Hub is a fast, fun and lightweight browser-based gaming platform
-        featuring classic and modern mini-games designed for quick entertainment.
-      </p>
-
-      <p>
-        This project is fully static, optimized for speed, responsive for mobile,
-        and built using pure HTML, CSS and JavaScript.
-      </p>
-
-      <ul>
-        <li><i class="fa-solid fa-bolt"></i> Fast loading</li>
-        <li><i class="fa-solid fa-mobile-screen"></i> Mobile optimized</li>
-        <li><i class="fa-solid fa-gamepad"></i> Multiple mini-games</li>
-        <li><i class="fa-solid fa-moon"></i> Dark & Light themes</li>
-        <li><i class="fa-solid fa-floppy-disk"></i> Saves your preferences</li>
-      </ul>
-
-      <div class="menu">
+      <nav class="menu" aria-label="Back navigation">
         <a href="../index.html">
           <i class="fa-solid fa-arrow-left"></i> Back to Home
         </a>
-      </div>
-
-    </div>
-  </div>
+      </nav>
+    </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-content">
-
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="../index.html">Home</a>
         <a href="about.html">About</a>
@@ -94,9 +99,9 @@
       </div>
 
       <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
-
     </div>
   </footer>
+
   <script src="../js/theme.js"></script>
 </body>
 </html>
