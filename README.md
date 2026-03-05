@@ -86,8 +86,6 @@ Student Reg No: 40794417
 
 ## 🗺️ Website Structure
 
-### Site Map
-
 ### Navigation Tree
 ![Site Organization Tree Diagram](./Project%20Plan/sitemap/nav-tree.jpg)
 
@@ -97,6 +95,9 @@ Student Reg No: 40794417
 ---
 
 ## 📐 Wireframes
+
+Wireframes were created during the design stage to plan the layout and user interface of the website. 
+They show the placement of navigation menus, game tiles, and content sections before development began.
 
 ### Home Page
 ![Home Page Wireframe](./Project%20Plan/wireframes/homepage.jpg)
