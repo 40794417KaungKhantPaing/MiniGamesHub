@@ -122,6 +122,10 @@ body::after {
   pointer-events: none;
 }
 
+.nav-buttons span {
+  display: none;
+}
+
 /* BURGER */
 .burger {
   display: none;
@@ -166,7 +170,7 @@ h1 {
   gap: 18px;
 }
 
-/* Steam-style Tiles */
+/* Tiles */
 .game-tile {
   position: relative;
   height: 210px;
@@ -242,12 +246,10 @@ h1 {
   bottom: 0;
   width: 100%;
   padding: 10px 14px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.45),
-    rgba(0, 0, 0, 0.18),
-    rgba(0, 0, 0, 0)
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.18),
+      rgba(0, 0, 0, 0));
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   z-index: 2;
@@ -272,11 +274,9 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  /* spacing between blocks */
-
 }
 
-/* Each block: full width*/
+/* Each block*/
 .block {
   background: rgba(255, 255, 255, .08);
   backdrop-filter: blur(14px);
@@ -354,7 +354,6 @@ h1 {
 }
 
 /* GAMES */
-
 .start-screen {
   background: rgba(255, 255, 255, .08);
   backdrop-filter: blur(14px);
@@ -384,27 +383,22 @@ h1 {
   color: #ef4444;
 }
 
-/* Red */
 .icon-o {
   color: #3b82f6;
 }
 
-/* Blue */
 .icon-brain {
   color: #a855f7;
 }
 
-/* Purple */
 .icon-puzzle {
   color: #22c55e;
 }
 
-/* Green */
 .icon-grid {
   color: #f59e0b;
 }
 
-/* Orange */
 
 .game-card {
   background: rgba(255, 255, 255, .08);
@@ -483,9 +477,7 @@ h1 {
 }
 
 
-/* TTT GRID */
-
-
+/* Tic-Tac-Toe */
 /* Side Picker Buttons */
 .side-picker {
   display: flex;
@@ -505,26 +497,32 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  display: flex;             /* center letter inside button */
+  display: flex;
+  /* center letter inside button */
   justify-content: center;
   align-items: center;
 
 }
+
 /* When X selected */
-#pickX:checked + label {
+#pickX:checked+label {
   border-color: #ef4444;
   background: rgba(239, 68, 68, 0.2);
   color: #ef4444;
 }
 
 /* When O selected */
-#pickO:checked + label {
+#pickO:checked+label {
   border-color: #3b82f6;
   background: rgba(59, 130, 246, 0.2);
   color: #3b82f6;
 }
 
-#selectedHint { font-size: 14px; margin-top: 5px; opacity: 0.8; }
+#selectedHint {
+  font-size: 14px;
+  margin-top: 5px;
+  opacity: 0.8;
+}
 
 .ttt-board {
   display: grid;
@@ -601,14 +599,12 @@ h1 {
 
 /*MEMORY GAME */
 /* Category selection */
-/* Container for the options */
 .category-grid {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin: 20px 0;
 }
-
 
 .cat-option {
   padding: 20px;
@@ -628,7 +624,6 @@ h1 {
   margin-bottom: 10px;
 }
 
-/* THE MAGIC: When the hidden radio is checked, style the label after it */
 input[type="radio"]:checked+.cat-option {
   border-color: #2ecc71;
   background-color: rgba(46, 204, 113, 0.1);
@@ -640,7 +635,6 @@ input[type="radio"]:checked+.cat-option {
 .memory-board {
   display: grid;
   grid-template-columns: repeat(6, 80px);
-  /* Desktop default */
   grid-auto-rows: 80px;
   gap: 12px;
   justify-content: center;
@@ -685,8 +679,9 @@ input[type="radio"]:checked+.cat-option {
   background: transparent;
   cursor: default;
 }
-.demo{
-  grid-template-columns:repeat(4,1fr)
+
+.demo {
+  grid-template-columns: repeat(4, 1fr)
 }
 
 /* UI ANIMATIONS */
@@ -734,16 +729,13 @@ button:hover,
 /* MENU ICON COLORS */
 .menu i {
   margin-right: 8px;
-  /* a bit more space from text */
   font-size: 24px;
-  /* bigger icons */
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 /* Hover glow & scale */
 .menu a:hover i {
   transform: scale(1.35);
-  /* bigger on hover */
   filter: drop-shadow(0 0 8px currentColor);
 }
 
@@ -762,19 +754,21 @@ button:hover,
 /* STATS PAGE */
 /* Cards container horizontal */
 .cards-wrapper {
-  display: flex;          /* horizontal layout */
+  display: flex;
   gap: 20px;
-  overflow-x: auto;       /* scroll if too many cards for screen */
+  overflow-x: auto;
+  /* scroll if too many cards for screen */
   padding: 10px 0;
 }
 
 /* Individual card styling */
 .stat-card {
-  flex: 0 0 220px;        /* fixed width for each card */
+  flex: 0 0 220px;
+  /* fixed width for each card */
   background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, background 0.2s;
 }
 
@@ -793,10 +787,10 @@ button:hover,
   margin-bottom: 10px;
 }
 
-/* Card body - vertical stats */
+/* Card body*/
 .stat-card-body {
   display: flex;
-  flex-direction: column;   /* stack stats vertically */
+  flex-direction: column;
   gap: 6px;
   font-size: 14px;
   font-weight: 500;
@@ -804,27 +798,27 @@ button:hover,
   line-height: 1.4;
 }
 
-/* Wrapper to align label and dropdown neatly */
+
 .dropdown-wrapper {
-  margin-bottom: 8px;      /* smaller spacing */
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 6px;                /* tighter gap */
+  gap: 6px;
   font-weight: bold;
-  font-size: 13px;         /* slightly smaller font */
+  font-size: 13px;
 }
 
-/* Compact styled dropdown */
+
 .styled-dropdown {
-  padding: 4px 8px;        /* smaller padding */
-  border-radius: 6px;      /* slightly smaller corners */
+  padding: 4px 8px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   background: rgba(255, 255, 255, .08);
   backdrop-filter: blur(14px);
-  font-size: 13px;         /* smaller text */
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 100px;        /* prevent it from being too small */
+  min-width: 100px;
 }
 
 /* Hover & focus effect */
@@ -848,7 +842,6 @@ button:hover,
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
   width: 100%;
 }
-
 
 .footer-content {
   max-width: 1000px;
@@ -939,8 +932,6 @@ button:hover,
   }
 }
 
-
-
 /* Mobile: 3 columns x 6 rows */
 @media (max-width: 600px) {
   .memory-board {
@@ -954,13 +945,10 @@ button:hover,
 
 }
 
-
-/* MOBILE NAV MODE */
 @media (max-width: 768px) {
 
   .block {
     padding: 30px 5%;
-    /* reduces overflow */
   }
 
   .burger {
@@ -1005,9 +993,7 @@ button:hover,
     text-align: center;
     padding: 30px 5%;
     min-height: auto;
-    /* removes forced tall height */
     justify-content: flex-start;
-    /* stops spacing push */
     gap: 16px;
   }
 
@@ -1025,17 +1011,3 @@ button:hover,
     margin-top: 0;
   }
 }
-
-/* DESKTOP */
-@media (min-width: 769px) {
-  .nav-buttons span {
-    display: none;
-  }
-}
-
-
-
-
-
-
-

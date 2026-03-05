@@ -1,3 +1,4 @@
+// Theme Toggle Button 
 function toggleTheme() {
   const icons = document.querySelectorAll("#themeBtn i");
 
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
+// BGM (Background Music)
 function toggleBgm() {
   const bgm = document.getElementById("bgm");
   const icons = document.querySelectorAll("#muteBtn i");
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Volume Slider in Settings
 document.addEventListener("DOMContentLoaded", () => {
   const bgm = document.getElementById("bgm");
   const slider = document.getElementById("volumeSlider");
