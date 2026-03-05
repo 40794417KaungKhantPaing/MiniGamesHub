@@ -89,10 +89,10 @@ Student Reg No: 40794417
 ### Site Map
 
 ### Navigation Tree
-![Site Organization Tree Diagram](./Project%20Plan/structure/nav-tree.jpg)
+![Site Organization Tree Diagram](./Project%20Plan/sitemap/nav-tree.jpg)
 
 ### Navigation Flow
-![Navigation Flow Diagram](./Project%20Plan/structure/nav-flow.jpg)
+![Navigation Flow Diagram](./Project%20Plan/sitemap/nav-flow.jpg)
 
 ---
 
