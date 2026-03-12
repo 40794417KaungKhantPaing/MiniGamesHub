@@ -434,6 +434,34 @@ h1 {
   color: #f59e0b;
 }
 
+.game-history {
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  text-align: left;
+}
+
+.game-history h2 {
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+#historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#historyList li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 4px;
+}
 
 .game-card {
   background: rgba(255, 255, 255, .08);
@@ -737,6 +765,95 @@ button:hover,
 .buttons {
   display: flex;
   gap: 8px;
+}
+
+/* Result Modal */
+.modal {
+  display: none;
+  /* hidden by default */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: var(--card);
+  color: var(--text);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  animation: popup 0.4s ease;
+}
+
+.modal-content h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: var(--card);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.modal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Icons Styling */
+.modal-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
+.modal-icons .icon-x {
+  color: #ef4444;
+  font-size: 36px;
+}
+
+.modal-icons .icon-o {
+  color: #3b82f6;
+  font-size: 36px;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* SETTINGS PAGE */
@@ -1046,3 +1163,4 @@ button:hover,
     margin-top: 0;
   }
 }
+

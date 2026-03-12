@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe - Menu</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop muted hidden></audio>
 
   <!-- Header / Navigation -->
   <header>
@@ -20,20 +21,20 @@
       </div>
 
       <div class="nav-buttons" id="navMenu">
-        <a href="../index.html"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
-        <a href="about.html"><i class="fa-solid fa-circle-info"></i> <span>About</span></a>
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-        <button type="button" onclick="toggleTheme()">
-          <i class="fa-solid fa-moon"></i> <span>Theme</span>
+        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
         </button>
 
-        <button type="button" onclick="toggleBgm()">
-          <i class="fa-solid fa-volume-high"></i> <span>Sound</span>
+        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
         </button>
       </div>
 
-      <button class="burger" id="burgerBtn" aria-label="Menu">
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </nav>
@@ -69,6 +70,10 @@
           <i class="fa-solid fa-play"></i> Start Game
         </button>
       </form>
+      <div class="game-history">
+        <h2>Last 5 Games</h2>
+        <ul id="historyList"></ul>
+      </div>
     </section>
   </main>
 

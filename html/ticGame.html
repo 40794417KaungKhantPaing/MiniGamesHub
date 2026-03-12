@@ -5,13 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop volume="0.2" hidden></audio>
-
+  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop muted hidden></audio>
+  <audio id="clickSound" src="../assets/sound/click.mp3" preload="auto"></audio>
+  <audio id="winSound" src="../assets/sound/win.mp3" preload="auto"></audio>
+  <audio id="drawSound" src="../assets/sound/draw.mp3" preload="auto"></audio>
+  <audio id="loseSound" src="../assets/sound/lose.mp3" preload="auto"></audio>
   <!-- Header / Navigation -->
   <header>
     <nav class="navbar" aria-label="Main navigation">
@@ -20,20 +24,20 @@
       </div>
 
       <div class="nav-buttons" id="navMenu">
-        <a href="../index.html"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-        <a href="settings.html"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
-        <a href="about.html"><i class="fa-solid fa-circle-info"></i> <span>About</span></a>
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-        <button type="button" onclick="toggleTheme()">
-          <i class="fa-solid fa-moon"></i> <span>Theme</span>
+        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
         </button>
 
-        <button type="button" onclick="toggleBgm()">
-          <i class="fa-solid fa-volume-high"></i> <span>Sound</span>
+        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
         </button>
       </div>
 
-      <button class="burger" id="burgerBtn" aria-label="Menu">
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </nav>
@@ -44,13 +48,13 @@
     <section class="game-card" aria-label="Tic Tac Toe Game">
       <h1 class="game-h1">
         <i class="fa-solid fa-xmark icon-x"></i>
-        <i class="fa-regular fa-circle icon-o"></i> Player vs Computer
+        <i class="fa-regular fa-circle icon-o"></i> Tic Tac Toe
       </h1>
 
       <!-- Top Controls -->
       <div class="top-ui">
         <div class="buttons">
-          <button onclick="window.location.replace('tic.html')" class="rst-but small">
+          <button onclick="goToMenu()" class="rst-but small">
             <i class="fa-solid fa-arrow-left"></i> Menu
           </button>
         </div>
@@ -80,6 +84,24 @@
         Wins: 0 | Losses: 0 | Draws: 0 | Win Rate: 0%
       </p>
     </section>
+
+    <!-- Result Popup Modal -->
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <!-- X and O icons -->
+        <div class="modal-icons">
+          <i class="fa-solid fa-xmark icon-x"></i>
+          <i class="fa-regular fa-circle icon-o"></i>
+        </div>
+
+        <h2 id="resultText">You Win!</h2>
+        <p id="resultStats">Wins: 0 | Losses: 0 | Draws: 0 | Win Rate: 0%</p>
+        <div class="modal-buttons">
+          <button id="restartBtn" class="modal-btn" onclick="reset()">Restart</button>
+          <button id="menuBtn" class="modal-btn" onclick="goToMenu()">Menu</button>
+        </div>
+      </div>
+    </div>
   </main>
 
 
