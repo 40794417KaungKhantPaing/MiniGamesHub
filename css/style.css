@@ -353,6 +353,41 @@ h1 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* ===== Scroll Slide Animations ===== */
+
+/* Initial hidden state */
+.block img,
+.block .text-flow {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: all 0.8s ease;
+}
+
+/* Normal blocks: image from LEFT, text from RIGHT */
+.block:not(.reverse) img {
+  transform: translateX(-80px);
+}
+
+.block:not(.reverse) .text-flow {
+  transform: translateX(80px);
+}
+
+/* Reverse blocks: image from RIGHT, text from LEFT */
+.block.reverse img {
+  transform: translateX(80px);
+}
+
+.block.reverse .text-flow {
+  transform: translateX(-80px);
+}
+
+/* When visible */
+.block.show img,
+.block.show .text-flow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* GAMES */
 .start-screen {
   background: rgba(255, 255, 255, .08);
