@@ -11,7 +11,8 @@
 
 <body>
   <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
-
+<audio id="gameOverSound" src="../assets/sound/kukugameover.mp3" preload="auto"></audio>
+<audio id="clickSound" src="../assets/sound/kukuclick.mp3" preload="auto"></audio>
   <!-- Header / Navigation -->
   <header>
     <nav class="navbar" aria-label="Main navigation">
@@ -50,8 +51,8 @@
 
       <div class="best-row">
         <p id="bestScore" aria-live="polite">Best Score: 0 | Last Score: 0</p>
-        <button onclick="resetGame()" class="rst-but small">Restart</button>
-        <button onclick="window.location.replace('kuku.html')" class="rst-but small">
+        <button onclick="reset()" class="rst-but small">Restart</button>
+        <button onclick="goToMenu()" class="rst-but small">
           <i class="fa-solid fa-arrow-left"></i> Menu
         </button>
       </div>
@@ -69,6 +70,24 @@
         <div class="kuku-cell" role="gridcell"></div>
       </section>
     </section>
+
+    <div id="resultModal" class="modal">
+  <div class="modal-content">
+
+    <div class="modal-icons">
+      <i class="fa-solid fa-border-all icon-grid"></i>
+    </div>
+
+    <h2 id="resultText" style="color: red;">Game Over</h2>
+    <p id="resultStats">Score: 0</p>
+
+    <div class="modal-buttons">
+      <button class="modal-btn" onclick="reset()">Restart</button>
+      <button class="modal-btn" onclick="goToMenu()">Menu</button>
+    </div>
+
+  </div>
+</div>
   </main>
 
   <!-- Footer -->

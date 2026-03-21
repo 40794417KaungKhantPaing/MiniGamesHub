@@ -47,16 +47,39 @@
         <i class="fa-solid fa-border-all icon-grid"></i> Kuku Kube
       </h1>
 
-      <p>
-        Test your visual perception and speed in Kuku Kube! Your goal is to spot the square
-        with a slightly different color from the rest as quickly as possible. The game gets
-        progressively harder, challenging your focus and reflexes. Can you beat your own best time
-        and become a master at spotting subtle differences?
-      </p>
+      <form action="kukuGame.html">
+        <p>Select Difficulty:</p>
 
-      <a href="kukuGame.html" class="rst-but">
-        <i class="fa-solid fa-play"></i> Start Game
-      </a>
+        <div class="kuku-difficulty">
+
+          <input type="radio" name="difficulty" value="easy" id="kukuEasy" hidden checked>
+          <label for="kukuEasy" class="kuku-diff-btn easy">
+            Easy
+          </label>
+
+          <input type="radio" name="difficulty" value="medium" id="kukuMedium" hidden>
+          <label for="kukuMedium" class="kuku-diff-btn medium">
+            Medium
+          </label>
+
+          <input type="radio" name="difficulty" value="hard" id="kukuHard" hidden>
+          <label for="kukuHard" class="kuku-diff-btn hard">
+            Hard
+          </label>
+
+        </div>
+
+        <p id="kukuHint">Difficulty: <b>Easy</b></p>
+
+        <button type="submit" class="rst-but">
+          <i class="fa-solid fa-play"></i> Start Game
+        </button>
+      </form>
+
+      <div class="game-history">
+        <h2>Last 5 Games</h2>
+        <ul id="kukuHistoryList"></ul>
+      </div>
 
     </section>
   </main>
@@ -91,6 +114,7 @@
   </footer>
 
   <script src="../js/theme.js"></script>
+  <script src="../js/kuku.js"></script>
 
 </body>
 

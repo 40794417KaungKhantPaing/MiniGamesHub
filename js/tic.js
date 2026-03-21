@@ -231,6 +231,11 @@ document.addEventListener("DOMContentLoaded", () => {
     statusText.textContent = msg;
     board.style.pointerEvents = "none";
 
+    // CLEAR SAVED GAME STATE
+    sessionStorage.removeItem("ticCells");
+    sessionStorage.removeItem("ticCurrentTurn");
+    sessionStorage.removeItem("ticLastMoveBy");
+
     // Save stats in one JSON object
     const stats = getStats();
     if (playerWon === true) stats.win++;
@@ -255,18 +260,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateScoreDisplay(stats);
 
+    // Update result text and color
     resultText.textContent = msg;
+
+    // Set color based on outcome
+    if (playerWon === true) {
+      resultText.style.color = "#22c55e"; // green for win
+      if (winSound) { winSound.currentTime = 0; winSound.play(); }
+    } else if (playerWon === false) {
+      resultText.style.color = "#ef4444"; // red for lose
+      if (loseSound) { loseSound.currentTime = 0; loseSound.play(); }
+    } else if (playerWon === null) {
+      resultText.style.color = "#f59e0b"; // yellow/orange for draw
+      if (drawSound) { drawSound.currentTime = 0; drawSound.play(); }
+    }
+
     const totalGames = stats.win + stats.lose + stats.draw;
     const winRate = totalGames === 0 ? 0 : ((stats.win / totalGames) * 100).toFixed(1);
     resultStats.textContent = `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
 
-    if (playerWon === true && winSound) { winSound.currentTime = 0; winSound.play(); }
-    else if (playerWon === false && loseSound) { loseSound.currentTime = 0; loseSound.play(); }
-    else if (playerWon === null && drawSound) { drawSound.currentTime = 0; drawSound.play(); }
-
     resultModal.style.display = "flex";
   }
-
 
   // -----------------------------
   // Start Game
