@@ -77,8 +77,12 @@
       </form>
 
       <div class="game-history">
-        <h2>Last 5 Games</h2>
-        <ul id="kukuHistoryList"></ul>
+        <input type="checkbox" id="historyToggle" hidden>
+        <label for="historyToggle" class="history-header">
+          <h2>Last 5 Games</h2>
+          <span class="arrow">&#9660;</span>
+        </label>
+        <ul id="kukuHistoryList" class="history-list"></ul>
       </div>
 
     </section>

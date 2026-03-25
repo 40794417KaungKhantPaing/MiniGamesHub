@@ -239,7 +239,6 @@ h1 {
   transform: scale(1);
 }
 
-
 .game-info {
   position: absolute;
   left: 0;
@@ -396,7 +395,7 @@ h1 {
   padding: 40px;
   text-align: center;
   max-width: 420px;
-  margin: 60px auto;
+  margin: 0px auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, .4);
   position: relative;
   overflow: hidden;
@@ -438,10 +437,19 @@ h1 {
   max-width: 420px;
   margin: 20px auto;
   padding: 20px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   border-radius: 16px;
   text-align: left;
+}
+
+/* Header clickable */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
 }
 
 .game-history h2 {
@@ -450,17 +458,38 @@ h1 {
   margin-bottom: 12px;
 }
 
-#historyList {
+/* Arrow rotation */
+.history-header .arrow {
+  transition: transform 0.3s ease;
+}
+
+/* Hide the list by default */
+.history-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
 
-#historyList li {
+/* List items style */
+.history-list li {
   margin-bottom: 8px;
   font-size: 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 4px;
+}
+
+/* Show the list when checkbox is checked */
+#historyToggle:checked~.history-list {
+  max-height: 500px;
+  /* large enough to show all items */
+}
+
+/* Rotate arrow when open */
+#historyToggle:checked+.history-header .arrow {
+  transform: rotate(180deg);
 }
 
 .game-card {
@@ -712,6 +741,78 @@ input[type="radio"]:checked+.cat-option {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
+}
+
+/* Memory board */
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(6, 80px);
+  /* Desktop default */
+  grid-auto-rows: 80px;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+/* Card cells */
+.memory-board .cell {
+  border-radius: 14px;
+  font-size: 32px;
+  font-weight: bold;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.memory-board .cell.flip {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+  border-radius: 14px;
+}
+
+.front {
+  background: transparent;
+  color: white;
+  font-size: 26px;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: transparent;
+}
+
+.memory-board .cell.matched {
+  box-shadow: 0 0 18px #22c55e;
+  animation: pop 0.35s ease;
+}
+
+.card-img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Stats (center) */
@@ -1174,34 +1275,34 @@ button:hover,
 .kuku-diff-btn {
   padding: 12px 18px;
   border-radius: 12px;
-  border: 2px solid rgba(255,255,255,.2);
+  border: 2px solid rgba(255, 255, 255, .2);
   cursor: pointer;
   transition: .3s;
   font-weight: bold;
 }
 
 /* EASY */
-#kukuEasy:checked + label {
-  background: rgba(34,197,94,.2);
+#kukuEasy:checked+label {
+  background: rgba(34, 197, 94, .2);
   border-color: #22c55e;
   color: #22c55e;
 }
 
 /* MEDIUM */
-#kukuMedium:checked + label {
-  background: rgba(245,158,11,.2);
+#kukuMedium:checked+label {
+  background: rgba(245, 158, 11, .2);
   border-color: #f59e0b;
   color: #f59e0b;
 }
 
 /* HARD */
-#kukuHard:checked + label {
-  background: rgba(239,68,68,.2);
+#kukuHard:checked+label {
+  background: rgba(239, 68, 68, .2);
   border-color: #ef4444;
   color: #ef4444;
 }
 
-#kukuHint{
-  font-size:14px;
-  opacity:.8;
+#kukuHint {
+  font-size: 14px;
+  opacity: .8;
 }

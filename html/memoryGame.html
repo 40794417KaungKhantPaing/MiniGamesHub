@@ -11,6 +11,9 @@
 
 <body>
   <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="clickSound" src="../assets/sound/click.mp3" hidden></audio>
+  <audio id="correctSound" src="../assets/sound/memorycorrect.mp3" hidden></audio>
+  <audio id="winSound" src="../assets/sound/memorywin.mp3" hidden></audio>
   <!-- Header / Navigation -->
   <header>
     <nav class="navbar" aria-label="Main navigation">
@@ -46,7 +49,7 @@
 
     <section class="top-ui">
       <div class="buttons">
-        <button onclick="window.location.replace('memory.html')" class="rst-but">
+        <button onclick="goToMenu()" class="rst-but">
           <i class="fa-solid fa-arrow-left"></i> Menu
         </button>
       </div>
@@ -86,6 +89,23 @@
     <p id="best" class="score">
       Best Time: --s | Best Moves: -- | Total Played: -- | Last: --s / -- moves
     </p>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-icons">
+          <i class="fa-solid fa-brain icon-brain"></i>
+        </div>
+
+        <h2 id="resultText" style="color: #22c55e;">You Win!</h2>
+        <p id="resultStats">Time: 0s | Moves: 0</p>
+
+        <div class="modal-buttons">
+          <button class="modal-btn" onclick="reset()">Restart</button>
+          <button class="modal-btn" onclick="goToMenu()">Menu</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
