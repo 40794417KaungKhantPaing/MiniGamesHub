@@ -5,12 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sliding Puzzle</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/puzzle.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="clickSound" src="../assets/sound/click.mp3" hidden></audio>
+  <audio id="winSound" src="../assets/sound/win.mp3" hidden></audio>
 
   <!-- Header / Navigation -->
   <header>
@@ -59,30 +63,29 @@
       </div>
 
       <!-- Puzzle Board -->
-      <section id="puzzle" class="board demo" role="grid" aria-label="Sliding Puzzle Board">
-        <div class="cell" role="gridcell">1</div>
-        <div class="cell" role="gridcell">2</div>
-        <div class="cell" role="gridcell">3</div>
-        <div class="cell" role="gridcell">4</div>
+      <section id="puzzle" class="puzzleBoard" role="grid" aria-label="Sliding Puzzle Board">
 
-        <div class="cell" role="gridcell">5</div>
-        <div class="cell" role="gridcell">6</div>
-        <div class="cell" role="gridcell">7</div>
-        <div class="cell" role="gridcell">8</div>
-
-        <div class="cell" role="gridcell">9</div>
-        <div class="cell" role="gridcell">10</div>
-        <div class="cell" role="gridcell">11</div>
-        <div class="cell" role="gridcell">12</div>
-
-        <div class="cell" role="gridcell">13</div>
-        <div class="cell" role="gridcell">14</div>
-        <div class="cell" role="gridcell">15</div>
-        <div class="cell empty" role="gridcell"></div>
       </section>
 
 
     </section>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-icons">
+          <i class="fa-solid fa-puzzle-piece icon-puzzle"></i>
+        </div>
+
+        <h2 id="resultText" style="color: #22c55e;">Puzzle Solved!</h2>
+        <p id="resultStats">Moves: 0</p>
+
+        <div class="modal-buttons">
+          <button class="modal-btn" onclick="reset()">Restart</button>
+          <button class="modal-btn" onclick="goToMenu()">Menu</button>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- FOOTER -->

@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Game - Playing</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/memory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -64,50 +66,32 @@
       </div>
     </section>
 
-    <section id="memory" class="board memory-board" aria-label="Memory game board" role="grid">
-      <!-- Memory cells -->
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
-      <div class="cell" role="gridcell">?</div>
+    <section id="memory" class="memory-board" aria-label="Memory game board" role="grid">
+
     </section>
 
     <p id="best" class="score">
       Best Time: --s | Best Moves: -- | Total Played: -- | Last: --s / -- moves
     </p>
 
-    <!-- Result Modal -->
-    <div id="resultModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-icons">
-          <i class="fa-solid fa-brain icon-brain"></i>
-        </div>
 
-        <h2 id="resultText" style="color: #22c55e;">You Win!</h2>
-        <p id="resultStats">Time: 0s | Moves: 0</p>
+  </main>
+  <!-- Result Modal -->
+  <div id="resultModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icons">
+        <i class="fa-solid fa-brain icon-brain"></i>
+      </div>
 
-        <div class="modal-buttons">
-          <button class="modal-btn" onclick="reset()">Restart</button>
-          <button class="modal-btn" onclick="goToMenu()">Menu</button>
-        </div>
+      <h2 id="resultText" style="color: #22c55e;">You Win!</h2>
+      <p id="resultStats">Time: 0s | Moves: 0</p>
+
+      <div class="modal-buttons">
+        <button class="modal-btn" onclick="reset()">Restart</button>
+        <button class="modal-btn" onclick="goToMenu()">Menu</button>
       </div>
     </div>
-  </main>
-
+  </div>
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">

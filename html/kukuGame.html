@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kuku Kube</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/kuku.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
-<audio id="gameOverSound" src="../assets/sound/kukugameover.mp3" preload="auto"></audio>
-<audio id="clickSound" src="../assets/sound/kukuclick.mp3" preload="auto"></audio>
+  <audio id="gameOverSound" src="../assets/sound/kukugameover.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="../assets/sound/kukuclick.mp3" preload="auto"></audio>
   <!-- Header / Navigation -->
   <header>
     <nav class="navbar" aria-label="Main navigation">
@@ -63,31 +65,28 @@
       </div>
 
       <!-- Kuku Kube Board -->
-      <section id="kukuBoard" class="kuku-board demo" role="grid" aria-label="Kuku Kube Board">
-        <div class="kuku-cell demo-odd" role="gridcell"></div>
-        <div class="kuku-cell" role="gridcell"></div>
-        <div class="kuku-cell" role="gridcell"></div>
-        <div class="kuku-cell" role="gridcell"></div>
+      <section id="kukuBoard" class="kuku-board" role="grid" aria-label="Kuku Kube Board">
+
       </section>
     </section>
 
     <div id="resultModal" class="modal">
-  <div class="modal-content">
+      <div class="modal-content">
 
-    <div class="modal-icons">
-      <i class="fa-solid fa-border-all icon-grid"></i>
+        <div class="modal-icons">
+          <i class="fa-solid fa-border-all icon-grid"></i>
+        </div>
+
+        <h2 id="resultText" style="color: red;">Game Over</h2>
+        <p id="resultStats">Score: 0</p>
+
+        <div class="modal-buttons">
+          <button class="modal-btn" onclick="reset()">Restart</button>
+          <button class="modal-btn" onclick="goToMenu()">Menu</button>
+        </div>
+
+      </div>
     </div>
-
-    <h2 id="resultText" style="color: red;">Game Over</h2>
-    <p id="resultStats">Score: 0</p>
-
-    <div class="modal-buttons">
-      <button class="modal-btn" onclick="reset()">Restart</button>
-      <button class="modal-btn" onclick="goToMenu()">Menu</button>
-    </div>
-
-  </div>
-</div>
   </main>
 
   <!-- Footer -->

@@ -1,0 +1,78 @@
+/* Sliding Puzzle */
+/* Puzzle Grid Selection */
+.puzzle-grid-select {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.puzzle-grid-btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* 3x3 */
+#grid3:checked+label {
+    background: rgba(34, 197, 94, .2);
+    border-color: #22c55e;
+    color: #22c55e;
+}
+
+/* 4x4 */
+#grid4:checked+label {
+    background: rgba(59, 130, 246, .2);
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+/* 5x5 */
+#grid5:checked+label {
+    background: rgba(245, 158, 11, .2);
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+#gridHint {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.puzzleBoard {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.puzzleBoard .cell {
+    width: 100%;
+    height: 80px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.puzzleBoard .empty {
+    background: transparent;
+    cursor: default;
+}
+
+/* RESPONSIVE */
+@media (max-width: 420px) {
+    .puzzleBoard .cell {
+        width: 100%;
+        height: 65px;
+        font-size: 26px;
+    }
+
+}

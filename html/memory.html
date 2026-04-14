@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Game - Menu</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/memory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -45,25 +47,21 @@
       <h1><i class="fa-solid fa-brain icon-brain"></i> Memory Game</h1>
       <p>Select your theme to begin:</p>
 
-      <div class="category-grid">
-        <input type="radio" name="category" value="fruit" id="fruit" checked hidden>
-        <label for="fruit" class="cat-option">
-          <i class="fa-solid fa-apple-whole"></i>
-          <span>Fruits</span>
-        </label>
+      <form id="categoryForm">
 
-        <input type="radio" name="category" value="geometry" id="geometry" hidden>
-        <label for="geometry" class="cat-option">
-          <i class="fa-solid fa-shapes"></i>
-          <span>Geometry</span>
-        </label>
-      </div>
-      <!-- Category Hint -->
-      <p id="categoryHintMenu" style="margin-top:10px; font-weight:bold;">
-        Selected Category: <b>Fruits</b>
-      </p>
 
-      <button id="startBtn" class="rst-but"><i class="fa-solid fa-play"></i> START GAME</button>
+        <div class="category-grid">
+          <input type="radio" name="category" value="fruit" id="fruit" hidden checked>
+          <label for="fruit" class="cat-option"><i class="fa-solid fa-apple-whole"></i> Fruits</label>
+
+          <input type="radio" name="category" value="geometry" id="geometry" hidden>
+          <label for="geometry" class="cat-option"><i class="fa-solid fa-shapes"></i> Geometry</label>
+        </div>
+
+        <p id="categoryHintMenu">Selected Category: <b>Fruits</b></p>
+
+        <button type="submit" class="rst-but"><i class="fa-solid fa-play"></i> Start Game</button>
+      </form>
       <div class="game-history">
         <input type="checkbox" id="historyToggle" hidden>
         <label for="historyToggle" class="history-header">

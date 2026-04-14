@@ -1,272 +1,313 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* =========================
-     AUDIO ELEMENTS
-  ========================= */
-  const clickSound = document.getElementById("clickSound");
-  const gameOverSound = document.getElementById("gameOverSound");
 
   /* =========================
-     MENU PAGE (Difficulty Picker)
-  ========================= */
-  const diffRadios = document.querySelectorAll("input[name='difficulty']");
-  const diffHint = document.getElementById("kukuHint");
+     MENU PAGE LOGIC
+     ========================= */
+  class KukuMenu {
+    constructor() {
+      this.radios = document.querySelectorAll("input[name='difficulty']");
+      this.diffHint = document.getElementById("kukuHint");
+      this.historyList = document.getElementById("kukuHistoryList");
+      this.selectedDifficulty = sessionStorage.getItem("kukuDifficulty") || "easy";
 
-  if (diffRadios.length && diffHint) {
-    function updateDifficulty() {
-      const selected = document.querySelector("input[name='difficulty']:checked");
-      const value = selected.value;
-      const label = value.charAt(0).toUpperCase() + value.slice(1);
-      diffHint.innerHTML = `Difficulty: <b>${label}</b>`;
-      sessionStorage.setItem("kukuDifficulty", value);
+      this.initRadios();
+      this.updateHint();
+      this.displayHistory();
+      this.initForm();
     }
-    diffRadios.forEach(radio => radio.addEventListener("change", updateDifficulty));
-    updateDifficulty();
-  }
 
-  /* =========================
-     LAST 5 GAMES HISTORY
-  ========================= */
-  const kukuHistoryList = document.getElementById("kukuHistoryList");
-  if (kukuHistoryList) {
-    const history = JSON.parse(localStorage.getItem("kukuHistory")) || [];
-    kukuHistoryList.innerHTML = history.map(game =>
-      `<li>Difficulty: <b>${game.difficulty.toUpperCase()}</b> - Score: <b>${game.score}</b> (${game.date})</li>`
-    ).join('');
-  }
-
-  /* =========================
-     GAME PAGE
-  ========================= */
-  const board = document.getElementById("kukuBoard");
-  if (!board) return;
-
-  const scoreText = document.getElementById("score");
-  const bestScoreText = document.getElementById("bestScore");
-  const timeBar = document.getElementById("timeBar");
-  const resultModal = document.getElementById("resultModal");
-  const resultText = document.getElementById("resultText");
-  const resultStats = document.getElementById("resultStats");
-
-  /* =========================
-     DIFFICULTY SETTINGS
-  ========================= */
-  const params = new URLSearchParams(window.location.search);
-  const difficulty = params.get("difficulty") || sessionStorage.getItem("kukuDifficulty") || "easy";
-
-  let colorDiff = 50;
-  let timeLimit = 5000;
-  if (difficulty === "easy") { colorDiff = 70; timeLimit = 6000; }
-  else if (difficulty === "medium") { colorDiff = 50; timeLimit = 5000; }
-  else if (difficulty === "hard") { colorDiff = 30; timeLimit = 3500; }
-
-  const bestKey = `kukuBest_${difficulty}`;
-  const lastKey = `kukuLast_${difficulty}`;
-
-  /* =========================
-     GAME VARIABLES
-  ========================= */
-  let score = 0;
-  let bestScore = parseInt(localStorage.getItem(bestKey)) || 0;
-  let lastScore = parseInt(localStorage.getItem(lastKey)) || "--";
-  bestScoreText.textContent = `Best (${difficulty}): ${bestScore} | Last: ${lastScore}`;
-
-  let gridSize = 2;
-  let correctClicksAtCurrentGrid = 0;
-  const clicksPerGrid = 5;
-  let timer;
-  let timeLeft = timeLimit;
-
-  /* =========================
-     SAVE / LOAD STATE
-  ========================= */
-  function saveGameState(boardState = null) {
-    if (!boardState) {
-      boardState = Array.from(board.children).map(cell => cell.style.background);
-    }
-    const state = { score, gridSize, correctClicksAtCurrentGrid, timeLeft, boardState };
-    sessionStorage.setItem("kukuState", JSON.stringify(state));
-  }
-
-  function loadGameState() {
-    const state = JSON.parse(sessionStorage.getItem("kukuState"));
-    if (state) {
-      score = state.score;
-      gridSize = state.gridSize;
-      correctClicksAtCurrentGrid = state.correctClicksAtCurrentGrid;
-      timeLeft = state.timeLeft;
-      updateScore();
-
-      if (state.boardState && state.boardState.length) {
-        board.innerHTML = "";
-        board.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-
-        state.boardState.forEach((color, i) => {
-          const cell = document.createElement("div");
-          cell.className = "kuku-cell";
-          cell.style.background = color;
-
-          cell.onclick = () => handleCellClick(i, state.boardState);
-          board.appendChild(cell);
+    initRadios() {
+      this.radios.forEach(radio => {
+        radio.checked = radio.value === this.selectedDifficulty;
+        radio.addEventListener("change", () => {
+          this.selectedDifficulty = radio.value;
+          sessionStorage.setItem("kukuDifficulty", this.selectedDifficulty);
+          this.updateHint();
         });
-        resetTimer();
-      } else createLevel();
-
-      return true;
+      });
     }
-    return false;
+
+    updateHint() {
+      if (this.diffHint) {
+        const label = this.selectedDifficulty.charAt(0).toUpperCase() + this.selectedDifficulty.slice(1);
+        this.diffHint.innerHTML = `Difficulty: <b>${label}</b>`;
+      }
+    }
+
+    displayHistory() {
+      if (!this.historyList) return;
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem("kukuHistory")) || [];
+      } catch (e) {
+        console.error("Invalid kukuHistory", e);
+        history = [];
+      }
+      this.historyList.innerHTML = history.map(game =>
+        `<li>Difficulty: <b>${game.difficulty.toUpperCase()}</b> - Score: <b>${game.score}</b> (${game.date})</li>`
+      ).join('');
+    }
+
+    initForm() {
+      const kukuForm = document.getElementById("kukuForm");
+      if (!kukuForm) return;
+      kukuForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        window.location.href = "kukuGame.html";
+      });
+    }
   }
 
   /* =========================
-     CELL CLICK HANDLER
-  ========================= */
-  function handleCellClick(index, boardState) {
-    clickSound.currentTime = 0;
-    clickSound.play();
+     GAME PAGE LOGIC
+     ========================= */
+  class KukuKube {
+    constructor() {
+      this.board = document.getElementById("kukuBoard");
+      if (!this.board) return;
 
-    const baseColor = boardState.find(c => c !== board.children[index].style.background) || board.children[index].style.background;
+      this.scoreText = document.getElementById("score");
+      this.bestScoreText = document.getElementById("bestScore");
+      this.timeBar = document.getElementById("timeBar");
+      this.resultModal = document.getElementById("resultModal");
+      this.resultText = document.getElementById("resultText");
+      this.resultStats = document.getElementById("resultStats");
 
-    if (board.children[index].style.background !== baseColor) {
-      score++;
-      correctClicksAtCurrentGrid++;
-      updateScore();
-      increaseDifficulty();
-      resetTimer();
-      createLevel();
-      saveGameState();
-    } else gameOver();
-  }
+      this.clickSound = document.getElementById("clickSound");
+      this.gameOverSound = document.getElementById("gameOverSound");
 
-  /* =========================
-     CREATE LEVEL
-  ========================= */
-  function createLevel() {
-    board.innerHTML = "";
-    board.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+      this.difficulty = sessionStorage.getItem("kukuDifficulty") || "easy";
 
-    const baseColor = randomColor();
-    const oddColor = slightlyDifferentColor(baseColor);
-    const oddIndex = Math.floor(Math.random() * gridSize * gridSize);
+      this.setupDifficulty();
 
-    for (let i = 0; i < gridSize * gridSize; i++) {
-      const cell = document.createElement("div");
-      cell.className = "kuku-cell";
-      cell.style.background = (i === oddIndex ? oddColor : baseColor);
-      cell.onclick = () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
+      this.bestKey = `kukuBest_${this.difficulty}`;
+      this.lastKey = `kukuLast_${this.difficulty}`;
 
-        if (i === oddIndex) {
-          score++;
-          correctClicksAtCurrentGrid++;
-          updateScore();
-          increaseDifficulty();
-          resetTimer();
-          createLevel();
-          saveGameState();
-        } else gameOver();
+      this.bestScore = parseInt(localStorage.getItem(this.bestKey)) || 0;
+      this.lastScore = localStorage.getItem(this.lastKey) || "--";
+
+      if (this.resultModal) {
+        window.addEventListener("click", e => {
+          if (e.target === this.resultModal) {
+            this.resultModal.style.display = "none";
+          }
+        });
+      }
+    }
+
+    setupDifficulty() {
+      if (this.difficulty === "easy") { this.colorDiff = 70; this.timeLimit = 6000; }
+      else if (this.difficulty === "medium") { this.colorDiff = 50; this.timeLimit = 5000; }
+      else { this.colorDiff = 30; this.timeLimit = 3500; }
+    }
+
+    init() {
+      this.updateScoreUI();
+      if (!this.loadGameState()) this.initGame();
+    }
+
+    initGame() {
+      this.score = 0;
+      this.gridSize = 2;
+      this.correctClicksAtCurrentGrid = 0;
+      this.timeLeft = this.timeLimit;
+
+      this.updateScoreUI();
+      this.createLevel();
+      this.saveGameState();
+    }
+
+    saveGameState() {
+      const boardState = Array.from(this.board.children).map(cell => cell.style.background);
+      const state = {
+        score: this.score,
+        gridSize: this.gridSize,
+        correctClicksAtCurrentGrid: this.correctClicksAtCurrentGrid,
+        timeLeft: this.timeLeft,
+        boardState: boardState
       };
-      board.appendChild(cell);
+      try {
+        sessionStorage.setItem("kukuState", JSON.stringify(state));
+      } catch (e) {
+        console.error("Failed to save game state", e);
+      }
     }
-    resetTimer();
-  }
 
-  /* =========================
-     UPDATE SCORE
-  ========================= */
-  function updateScore() {
-    scoreText.textContent = `Score: ${score}`;
-    if (score > bestScore) {
-      bestScore = score;
-      localStorage.setItem(bestKey, bestScore);
+    loadGameState() {
+      let state;
+
+      try {
+        state = JSON.parse(sessionStorage.getItem("kukuState"));
+      } catch (e) {
+        console.error("Corrupted kukuState", e);
+        sessionStorage.removeItem("kukuState");
+        return false;
+      }
+      if (!state) return false;
+
+      this.score = state.score;
+      this.gridSize = state.gridSize;
+      this.correctClicksAtCurrentGrid = state.correctClicksAtCurrentGrid;
+      this.timeLeft = state.timeLeft;
+
+      this.updateScoreUI();
+
+      if (state.boardState && state.boardState.length > 0) {
+        this.renderBoard(state.boardState);
+        this.startTimer(true);
+        return true;
+      }
+      return false;
     }
-    bestScoreText.textContent = `Best (${difficulty}): ${bestScore} | Last: ${lastScore}`;
-  }
 
-  function increaseDifficulty() {
-    if (correctClicksAtCurrentGrid >= clicksPerGrid && gridSize < 6) {
-      gridSize++;
-      correctClicksAtCurrentGrid = 0;
+    createLevel() {
+      const totalCells = this.gridSize * this.gridSize;
+      const baseColor = this.randomColor();
+      const oddColor = this.slightlyDifferentColor(baseColor);
+      const oddIndex = Math.floor(Math.random() * totalCells);
+
+      const colors = Array(totalCells).fill(baseColor);
+      colors[oddIndex] = oddColor;
+
+      this.renderBoard(colors, oddIndex);
+      this.startTimer();
+    }
+
+    renderBoard(colors, oddIndex = -1) {
+      this.board.innerHTML = "";
+      this.board.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
+
+      colors.forEach((color, i) => {
+        const cell = document.createElement("div");
+        cell.className = "kuku-cell";
+        cell.style.background = color;
+        cell.addEventListener("click", () => this.handleCellClick(i, colors, oddIndex));
+        this.board.appendChild(cell);
+      });
+    }
+
+    handleCellClick(index, colors, oddIndex) {
+      if (this.clickSound) { this.clickSound.currentTime = 0; this.clickSound.play(); }
+
+      const isCorrect = oddIndex > -1
+        ? index === oddIndex
+        : colors[index] !== this.getMostFrequentColor(colors);
+
+      if (isCorrect) {
+        this.score++;
+        this.correctClicksAtCurrentGrid++;
+        this.updateScoreUI();
+        this.increaseDifficulty();
+        this.createLevel();
+        this.saveGameState();
+      } else this.gameOver();
+    }
+
+    getMostFrequentColor(arr) {
+      const counts = {};
+      arr.forEach(c => counts[c] = (counts[c] || 0) + 1);
+      return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+    }
+
+    increaseDifficulty() {
+      const clicksPerGrid = 5;
+      if (this.correctClicksAtCurrentGrid >= clicksPerGrid && this.gridSize < 6) {
+        this.gridSize++;
+        this.correctClicksAtCurrentGrid = 0;
+      }
+    }
+
+    startTimer(resume = false) {
+      clearInterval(this.timer);
+      if (!resume) this.timeLeft = this.timeLimit;
+      this.updateTimeBar();
+
+      this.timer = setInterval(() => {
+        this.timeLeft -= 100;
+        this.updateTimeBar();
+        if (this.timeLeft <= 0) {
+          clearInterval(this.timer);
+          this.gameOver();
+        }
+      }, 100);
+    }
+
+    updateTimeBar() {
+      if (this.timeBar) this.timeBar.style.width = (this.timeLeft / this.timeLimit) * 100 + "%";
+    }
+
+    updateScoreUI() {
+      if (this.scoreText) this.scoreText.textContent = `Score: ${this.score}`;
+      if (this.score > this.bestScore) {
+        this.bestScore = this.score;
+        localStorage.setItem(this.bestKey, this.bestScore);
+      }
+      if (this.bestScoreText) this.bestScoreText.textContent = `Best (${this.difficulty}): ${this.bestScore} | Last: ${this.lastScore}`;
+    }
+
+    gameOver() {
+      clearInterval(this.timer);
+      this.lastScore = this.score;
+      localStorage.setItem(this.lastKey, this.lastScore);
+
+      if (this.gameOverSound) { this.gameOverSound.currentTime = 0; this.gameOverSound.play(); }
+
+      if (this.resultText) this.resultText.textContent = "Game Over";
+      if (this.resultStats) this.resultStats.textContent = `Difficulty: ${this.difficulty.toUpperCase()} | Score: ${this.score} | Best: ${this.bestScore}`;
+      if (this.resultModal) this.resultModal.style.display = "flex";
+
+      sessionStorage.removeItem("kukuState");
+      this.saveToHistory();
+    }
+
+    saveToHistory() {
+      let history = [];
+      try {
+        history = JSON.parse(localStorage.getItem("kukuHistory")) || [];
+      } catch {
+        history = [];
+      }
+      history.unshift({ date: new Date().toLocaleString(), score: this.score, difficulty: this.difficulty });
+      if (history.length > 5) history.pop();
+      localStorage.setItem("kukuHistory", JSON.stringify(history));
+    }
+
+    randomColor() {
+      const r = Math.floor(Math.random() * 200);
+      const g = Math.floor(Math.random() * 200);
+      const b = Math.floor(Math.random() * 200);
+      return `rgb(${r},${g},${b})`;
+    }
+
+    slightlyDifferentColor(color) {
+      const nums = color.match(/\d+/g).map(Number);
+      const clamp = (v) => Math.max(0, Math.min(255, v));
+      return `rgb(${clamp(nums[0] + this.colorDiff)}, ${clamp(nums[1] + this.colorDiff)}, ${clamp(nums[2] + this.colorDiff)})`;
+    }
+
+    reset() {
+      sessionStorage.removeItem("kukuState");
+      if (this.resultModal) this.resultModal.style.display = "none";
+      this.initGame();
+    }
+
+    goToMenu() {
+      sessionStorage.removeItem("kukuState");
+      window.location.replace("kuku.html");
     }
   }
 
-  /* =========================
-     TIMER
-  ========================= */
-  function resetTimer() {
-    clearInterval(timer);
-    timeLeft = timeLimit;
-    timeBar.style.width = "100%";
-
-    timer = setInterval(() => {
-      timeLeft -= 100;
-      timeBar.style.width = (timeLeft / timeLimit) * 100 + "%";
-      if (timeLeft <= 0) { clearInterval(timer); gameOver(); }
-      saveGameState();
-    }, 100);
+  // Initialize
+  if (document.getElementById("kukuForm")) {
+    new KukuMenu();
   }
 
-  /* =========================
-     GAME OVER
-  ========================= */
-  function gameOver() {
-    clearInterval(timer);
-    lastScore = score;
-    localStorage.setItem(lastKey, lastScore);
+  if (document.getElementById("kukuBoard")) {
+    const game = new KukuKube();
+    game.init();
 
-    if (gameOverSound) { gameOverSound.currentTime = 0; gameOverSound.play(); }
-
-    resultText.textContent = "Game Over";
-    resultStats.textContent = `Difficulty: ${difficulty.toUpperCase()} | Score: ${score} | Best: ${bestScore}`;
-
-    if (score === 0) resultText.style.color = "#ef4444";
-    else if (score < bestScore) resultText.style.color = "#f59e0b";
-    else resultText.style.color = "#22c55e";
-
-    resultModal.style.display = "flex";
-    sessionStorage.removeItem("kukuState");
-
-    // Save last 5 games
-    let history = JSON.parse(localStorage.getItem("kukuHistory")) || [];
-    history.unshift({ date: new Date().toLocaleString(), score, difficulty });
-    if (history.length > 5) history.pop();
-    localStorage.setItem("kukuHistory", JSON.stringify(history));
+    // Buttons
+    window.reset = () => game.reset();
+    window.goToMenu = () => game.goToMenu();
   }
-
-  /* =========================
-     COLOR FUNCTIONS
-  ========================= */
-  function randomColor() {
-    const r = Math.floor(Math.random() * 200);
-    const g = Math.floor(Math.random() * 200);
-    const b = Math.floor(Math.random() * 200);
-    return `rgb(${r},${g},${b})`;
-  }
-
-  function slightlyDifferentColor(color) {
-    const nums = color.match(/\d+/g).map(Number);
-    return `rgb(${clamp(nums[0] + colorDiff)}, ${clamp(nums[1] + colorDiff)}, ${clamp(nums[2] + colorDiff)})`;
-  }
-
-  function clamp(v) { return Math.max(0, Math.min(255, v)); }
-
-  /* =========================
-     START GAME
-  ========================= */
-  if (!loadGameState()) createLevel();
 });
-
-/* =========================
-   RESET GAME FUNCTION
-========================= */
-function reset() {
-  sessionStorage.removeItem("kukuState");
-  location.reload();
-}
-
-/* =========================
-   GO TO MENU FUNCTION
-========================= */
-function goToMenu() {
-  sessionStorage.removeItem("kukuState");
-  window.location.replace("kuku.html");
-}

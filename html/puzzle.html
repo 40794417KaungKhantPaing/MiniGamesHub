@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sliding Puzzle - Menu</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/puzzle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -45,15 +47,38 @@
             <h1>
                 <i class="fa-solid fa-puzzle-piece icon-puzzle"></i> Sliding Puzzle
             </h1>
-            <p>
-                Test your logic and problem-solving skills with this sliding puzzle game.
-                Rearrange the tiles to complete the image as quickly as possible. Each move counts,
-                so plan carefully and challenge yourself to beat your best time!
-            </p>
+            <!-- Grid Selection -->
+            <form id="puzzleForm">
+                <p>Select Grid Size:</p>
 
-            <a href="puzzleGame.html" class="rst-but" role="button">
-                <i class="fa-solid fa-play"></i> Start Game
-            </a>
+                <div class="puzzle-grid-select">
+
+                    <input type="radio" name="grid" value="3" id="grid3" hidden checked>
+                    <label for="grid3" class="puzzle-grid-btn g3">3 x 3</label>
+
+                    <input type="radio" name="grid" value="4" id="grid4" hidden>
+                    <label for="grid4" class="puzzle-grid-btn g4">4 x 4</label>
+
+                    <input type="radio" name="grid" value="5" id="grid5" hidden>
+                    <label for="grid5" class="puzzle-grid-btn g5">5 x 5</label>
+
+
+                </div>
+
+                <p id="gridHint">Grid: <b>3 x 3</b></p>
+
+                <button type="submit" class="rst-but">
+                    <i class="fa-solid fa-play"></i> Start Game
+                </button>
+            </form>
+            <div class="game-history">
+                <input type="checkbox" id="historyToggle" hidden>
+                <label for="historyToggle" class="history-header">
+                    <h2>Last 5 Games</h2>
+                    <span class="arrow">&#9660;</span>
+                </label>
+                <ul id="puzzleHistoryList" class="history-list"></ul>
+            </div>
         </section>
     </main>
 
@@ -88,6 +113,7 @@
     </footer>
 
     <script src="../js/theme.js"></script>
+    <script src="../js/puzzle.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,86 @@
+/* Tic-Tac-Toe */
+/* Side Picker Buttons */
+.side-picker {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.side-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* When X selected */
+#pickX:checked+label {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+/* When O selected */
+#pickO:checked+label {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+#selectedHint {
+    font-size: 14px;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 260px;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+.ttt-board .cell {
+    width: 80px;
+    height: 80px;
+    background: #e5e7eb;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.ttt-board .cell:hover {
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 420px) {
+    .ttt-board {
+        width: 210px;
+        gap: 12px;
+    }
+
+    .ttt-board .cell {
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
+    }
+}
