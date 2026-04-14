@@ -125,6 +125,7 @@ input[type="radio"]:checked+.cat-option {
 @media (max-width: 600px) {
     .memory-board {
         grid-template-columns: repeat(3, 1fr);
+        row-gap: 18px;
     }
 
     .memory-board .cell {
