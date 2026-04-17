@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("click", e => {
           if (e.target === this.resultModal) {
             this.resultModal.style.display = "none";
+            this.reset();
           }
         });
       }

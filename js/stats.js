@@ -1,4 +1,23 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  const input = document.getElementById("usernameInput");
+  const welcome = document.getElementById("welcomeUser");
+
+  function loadUser() {
+    const name = localStorage.getItem("playerName") || "Guest";
+    input.value = name;
+    welcome.textContent = `Welcome, ${name} 👋`;
+  }
+
+  window.saveUsername = function () {
+    const name = input.value.trim();
+    localStorage.setItem("playerName", name);
+    welcome.textContent = `Welcome, ${name} 👋`;
+  };
+
+  loadUser();
   /* ------------------ Tic Tac Toe ------------------ */
   const tttStatsEl = document.getElementById("tttStats");
   const tttStats = JSON.parse(localStorage.getItem("ticStats")) || { win: 0, lose: 0, draw: 0, played: 0 };
@@ -111,20 +130,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ------------------ Reset All Stats ------------------ */
   window.resetAllStats = () => {
-    if (confirm("Are you sure you want to reset all game stats?")) {
+  document.getElementById("resetModal").style.display = "flex";
+};
 
-      const keysToRemove = [
-        "ticStats", "ticHistory",
-        "memoryHistory",
-        "memoryBestTime_fruit", "memoryBestMoves_fruit", "memoryTotalPlayed_fruit", "memoryLast_fruit",
-        "memoryBestTime_geometry", "memoryBestMoves_geometry", "memoryTotalPlayed_geometry", "memoryLast_geometry",
-        "puzzleBest_3", "puzzleTotal_3", "puzzleLast_3", "puzzleBest_4", "puzzleTotal_4", "puzzleLast_4", "puzzleBest_5", "puzzleTotal_5", "puzzleLast_5", "puzzleHistory",
-        "kukuHistory", "kukuBest_easy", "kukuLast_easy", "kukuBest_medium", "kukuLast_medium", "kukuBest_hard", "kukuLast_hard"
-      ];
+window.closeResetModal = () => {
+  document.getElementById("resetModal").style.display = "none";
+};
 
-      keysToRemove.forEach(key => localStorage.removeItem(key));
+window.confirmReset = () => {
+  const keys = [
+    "ticStats",
+    "ticHistory",
+    "memoryHistory",
+    "puzzleHistory",
+    "kukuHistory",
+    "playerName"
+  ];
 
-      location.reload();
-    }
-  };
+  ["fruit", "geometry"].forEach(cat => {
+    keys.push(
+      `memoryBestTime_${cat}`,
+      `memoryBestMoves_${cat}`,
+      `memoryTotalPlayed_${cat}`,
+      `memoryLast_${cat}`
+    );
+  });
+
+  ["3", "4", "5"].forEach(size => {
+    keys.push(
+      `puzzleBest_${size}`,
+      `puzzleTotal_${size}`,
+      `puzzleLast_${size}`
+    );
+  });
+
+  ["easy", "medium", "hard"].forEach(diff => {
+    keys.push(
+      `kukuBest_${diff}`,
+      `kukuLast_${diff}`
+    );
+  });
+
+  keys.forEach(k => localStorage.removeItem(k));
+  location.reload();
+};
 });

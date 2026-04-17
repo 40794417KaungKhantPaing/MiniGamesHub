@@ -93,10 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
             this.totalPlayed = JSON.parse(localStorage.getItem(`memoryTotalPlayed_${this.currentCategory}`)) ?? 0;
             this.lastGame = JSON.parse(localStorage.getItem(`memoryLast_${this.currentCategory}`)) ?? { time: "--", moves: "--" };
 
-            // Modal close listener
-            window.addEventListener("click", (e) => {
-                if (e.target === this.resultModal) this.resultModal.style.display = "none";
-            });
+            if (this.resultModal) {
+                window.addEventListener("click", e => {
+                    if (e.target === this.resultModal) {
+                        this.resultModal.style.display = "none";
+                        this.reset();
+                    }
+                });
+            }
         }
 
         init() {

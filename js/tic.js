@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("click", e => {
           if (e.target === this.resultModal) {
             this.resultModal.style.display = "none";
+            this.reset();
           }
         });
       }
@@ -371,19 +372,26 @@ document.addEventListener("DOMContentLoaded", () => {
       this.showModal(msg, playerWon, stats);
     }
 
+    formatStats(stats) {
+  const winRate =
+    stats.played === 0
+      ? 0
+      : ((stats.win / stats.played) * 100).toFixed(1);
+
+  return `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
+}
+
     showModal(msg, playerWon, stats) {
       this.resultText.textContent = msg;
       this.resultText.style.color = playerWon === true ? "#22c55e" : playerWon === false ? "#ef4444" : "#f59e0b";
 
-      const winRate = stats.played === 0 ? 0 : ((stats.win / stats.played) * 100).toFixed(1);
-      this.resultStats.textContent = `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
+      this.resultStats.textContent = this.formatStats(stats);
 
       this.resultModal.style.display = "flex";
     }
 
     updateScoreDisplay(stats = JSON.parse(localStorage.getItem("ticStats")) || { win: 0, lose: 0, draw: 0, played: 0 }) {
-      const winRate = stats.played === 0 ? 0 : ((stats.win / stats.played) * 100).toFixed(1);
-      this.scoreText.textContent = `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
+      this.scoreText.textContent = this.formatStats(stats);
     }
 
     playSound(sound) {

@@ -48,6 +48,17 @@
       <h1 id="stats-title">
         <i class="fa-solid fa-chart-simple"></i> Game Stats
       </h1>
+      <div class="user-box">
+        <label for="usernameInput">
+          <i class="fa-solid fa-user"></i> Player:
+        </label>
+
+        <input type="text" id="usernameInput" placeholder="Enter your name">
+
+        <button onclick="saveUsername()">Save</button>
+      </div>
+
+      <h2 id="welcomeUser" class="welcome-user"></h2>
 
       <section class="cards-wrapper">
 
@@ -147,6 +158,18 @@
         <a href="settings.html" class="secondary-btn">
           <i class="fa-solid fa-arrow-left"></i> Back to Settings
         </a>
+      </div>
+
+      <div id="resetModal" class="reset-modal">
+        <div class="reset-modal-content">
+          <h2>Reset All Stats?</h2>
+          <p>This will delete all game progress including your name.</p>
+
+          <div class="reset-modal-buttons">
+            <button class="reset-modal-btn danger" onclick="confirmReset()">Yes, Reset</button>
+            <button class="reset-modal-btn" onclick="closeResetModal()">Cancel</button>
+          </div>
+        </div>
       </div>
     </article>
   </main>
