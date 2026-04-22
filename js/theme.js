@@ -99,9 +99,12 @@ const observer = new IntersectionObserver(entries => {
 });
 // Observe each block
 blocks.forEach(block => observer.observe(block));
+
 function playRandom() {
-  const games = ['/html/tic.html', '/html/memory.html', '/html/puzzle.html', '/html/kuku.html'];
+  const games = ['html/tic.html', 'html/memory.html', 'html/puzzle.html', 'html/kuku.html'];
   const randomGame = games[Math.floor(Math.random() * games.length)];
+  
+  console.log("Attempting to navigate to: " + randomGame); // This helps you debug
   window.location.href = randomGame;
 }
 
