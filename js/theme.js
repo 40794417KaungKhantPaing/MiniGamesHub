@@ -100,7 +100,7 @@ const observer = new IntersectionObserver(entries => {
 // Observe each block
 blocks.forEach(block => observer.observe(block));
 function playRandom() {
-  const games = ['tic.html', 'memory.html', 'puzzle.html', 'kuku.html'];
+  const games = ['/html/tic.html', '/html/memory.html', '/html/puzzle.html', '/html/kuku.html'];
   const randomGame = games[Math.floor(Math.random() * games.length)];
   window.location.href = randomGame;
 }

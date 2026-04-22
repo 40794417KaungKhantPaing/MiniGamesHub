@@ -83,9 +83,13 @@ body::after {
 }
 
 .logo {
-
   font-weight: 700;
   font-size: 16px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* NAV BUTTONS */
