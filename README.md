@@ -8,7 +8,7 @@ It is built using HTML, CSS, and JavaScript and runs directly in the browser.
 
 ## Badge
 
-[![pages-build-deployment](https://github.com/40794417KaungKhantPaing/MiniGamesHub/actions/workflows/pages/pages-build-deployment/badge.svg?label=Deployment)](https://github.com/40794417KaungKhantPaing/MiniGamesHub/actions/workflows/pages/pages-build-deployment)
+[![Deployment](https://img.shields.io/github/actions/workflow/status/40794417KaungKhantPaing/MiniGamesHub/pages-build-deployment?label=Deployment)](https://github.com/40794417KaungKhantPaing/MiniGamesHub/actions/workflows/pages/pages-build-deployment)
 
 ---
 
