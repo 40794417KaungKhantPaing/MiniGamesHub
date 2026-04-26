@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="bgm" src="../assets/sound/background.mp3" loop hidden></audio>
   <audio id="clickSound" src="../assets/sound/click.mp3" hidden></audio>
   <audio id="correctSound" src="../assets/sound/memorycorrect.mp3" hidden></audio>
   <audio id="winSound" src="../assets/sound/memorywin.mp3" hidden></audio>
@@ -28,11 +28,11 @@
         <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
         <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <button class="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
           <i class="fa-solid fa-moon"></i><span>Theme</span>
         </button>
 
-        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+        <button class="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
           <i class="fa-solid fa-volume-high"></i><span>Sound</span>
         </button>
       </div>
@@ -51,9 +51,7 @@
 
     <section class="top-ui">
       <div class="buttons">
-        <button onclick="goToMenu()" class="rst-but">
-          <i class="fa-solid fa-arrow-left"></i> Menu
-        </button>
+        <button onclick="goToMenu()" class="rst-but">Menu</button>
       </div>
 
       <div class="stats-container">

@@ -12,7 +12,7 @@
 
 <body>
 
-  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="bgm" src="../assets/sound/background.mp3" loop hidden></audio>
 
   <!-- Header / Navigation -->
   <header>
@@ -26,11 +26,11 @@
         <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
         <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <button class="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
           <i class="fa-solid fa-moon"></i><span>Theme</span>
         </button>
 
-        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+        <button class="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
           <i class="fa-solid fa-volume-high"></i><span>Sound</span>
         </button>
       </div>
@@ -49,11 +49,11 @@
 
       <section class="menu" aria-label="Settings Options">
 
-        <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <button class="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
           <i class="fa-solid fa-moon"></i> <span>Theme</span>
         </button>
 
-        <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+        <button class="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
           <i class="fa-solid fa-volume-high"></i> Sound
         </button>
 

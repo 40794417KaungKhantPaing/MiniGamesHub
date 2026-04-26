@@ -12,48 +12,72 @@
 
 <body>
   <script src="../js/how-to.js"></script>
-  <nav class="navbar" aria-label="Main navigation">
-    <a href="../index.html" class="logo">
-      <i class="fa-solid fa-gamepad"></i> Mini Games Hub
-    </a>
+  <audio id="bgm" src="../assets/sound/background.mp3" loop hidden></audio>
 
-    <div class="nav-buttons" id="navMenu">
-      <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-      <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
-      <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="../index.html" class="logo">
+        <i class="fa-solid fa-gamepad"></i> Mini Games Hub
+      </a>
 
-      <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
-        <i class="fa-solid fa-moon"></i><span>Theme</span>
+      <div class="nav-buttons" id="navMenu">
+        <a href="../index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+        <button class="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i><span>Theme</span>
+        </button>
+
+        <button class="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+          <i class="fa-solid fa-volume-high"></i><span>Sound</span>
+        </button>
+      </div>
+
+      <button class="burger" id="burgerBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
       </button>
+    </nav>
+  </header>
 
-      <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
-        <i class="fa-solid fa-volume-high"></i><span>Sound</span>
-      </button>
-    </div>
+  <!-- MAIN CONTENT -->
+  <main>
+    <article class="card" style="text-align: center;">
 
-    <button class="burger" id="burgerBtn" aria-label="Open menu">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </nav>
+      <header>
+        <h1 id="game-title" class="game-h1">
+          <i class="fa-solid fa-circle-info"></i> Game Rules
+        </h1>
+      </header>
 
-  <div class="card" style="text-align: center;">
-    <h1 id="game-title" class="game-h1"><i class="fa-solid fa-circle-info"></i> Game Rules</h1>
+      <section class="text-flow" style="width: 100%; text-align: left; padding: 20px;">
 
-    <div class="text-flow" style="width: 100%; text-align: left; padding: 20px;">
-      <h2>Objective</h2>
-      <p id="game-objective"></p>
+        <section aria-labelledby="objective-title">
+          <h2 id="objective-title">Objective</h2>
+          <p id="game-objective"></p>
+        </section>
 
-      <h2>How to Play</h2>
-      <ul id="game-mechanics">
-      </ul>
+        <section aria-labelledby="how-to-play-title">
+          <h2 id="how-to-play-title">How to Play</h2>
+          <ul id="game-mechanics"></ul>
+        </section>
 
-      <h2>Pro Tip</h2>
-      <p id="game-tip"></p>
-    </div>
+        <section aria-labelledby="tip-title">
+          <h2 id="tip-title">Pro Tip</h2>
+          <p id="game-tip"></p>
+        </section>
 
-    <a id="play-button" href="#" class="rst-but" style="display: inline-block; width: auto; padding: 12px 30px;">Got
-      it!</a>
-  </div>
+      </section>
+
+      <footer>
+        <a id="play-button" href="#" class="rst-but" style="display: inline-block; width: auto; padding: 12px 30px;">
+          Got it!
+        </a>
+      </footer>
+
+    </article>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -79,7 +103,10 @@
         </a>
       </div>
 
-      <p><i class="fa-regular fa-copyright"></i> <span id="currentYear"></span> Mini Games Hub. All rights reserved.</p>
+      <p>
+        <i class="fa-regular fa-copyright"></i>
+        <span id="currentYear"></span> Mini Games Hub. All rights reserved.
+      </p>
 
     </div>
   </footer>

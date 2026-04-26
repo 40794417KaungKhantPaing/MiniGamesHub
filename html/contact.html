@@ -12,7 +12,7 @@
 
 <body>
 
-  <audio id="bgm" src="../assets/sound/background.mp3" autoplay loop hidden></audio>
+  <audio id="bgm" src="../assets/sound/background.mp3" loop hidden></audio>
 
   <!-- NAVIGATION -->
   <nav class="navbar" aria-label="Main navigation">
@@ -25,11 +25,11 @@
       <a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
       <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
 
-      <button id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
+      <button class="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">
         <i class="fa-solid fa-moon"></i><span>Theme</span>
       </button>
 
-      <button id="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
+      <button class="muteBtn" onclick="toggleBgm()" aria-label="Toggle sound">
         <i class="fa-solid fa-volume-high"></i><span>Sound</span>
       </button>
     </div>
@@ -67,6 +67,11 @@
         </a>
 
       </form>
+      <!-- Success message -->
+      <div id="successMsg" class="success-msg">
+        <i class="fa-solid fa-circle-check"></i>
+        Message sent successfully!
+      </div>
 
     </section>
   </main>
@@ -98,6 +103,25 @@
     </div>
   </footer>
 
+  <script>
+    const form = document.querySelector("form.menu");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // show fake success message
+      successMsg.style.display = "block";
+
+      // clear form inputs
+      form.reset();
+
+      // hide message after 3 seconds
+      setTimeout(() => {
+        successMsg.style.display = "none";
+      }, 3000);
+    });
+  </script>
   <script src="../js/theme.js"></script>
 </body>
 

@@ -1,3 +1,4 @@
+// Run code after DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =================================
@@ -5,11 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
       ================================= */
   class TicMenu {
     constructor() {
+      // Get UI elements
       this.radios = document.querySelectorAll("input[name='side']");
       this.selectedHint = document.getElementById("selectedHint");
       this.historyList = document.getElementById("historyList");
+
+      // Load selected side (default = X)
       this.selectedSide = sessionStorage.getItem("ticSide") || "X";
 
+      // Initialize menu
       this.initRadios();
       this.updateHint();
       this.displayHistory();
@@ -17,24 +22,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    // Setup radio buttons for selecting X or O
     initRadios() {
       this.radios.forEach(radio => {
         radio.checked = radio.value === this.selectedSide;
         radio.addEventListener("change", () => {
           this.selectedSide = radio.value;
+          // Save selected side
           sessionStorage.setItem("ticSide", this.selectedSide);
+
+          // Clear previous game state (important when switching side)
           sessionStorage.removeItem("ticState");
           this.updateHint();
         });
       });
     }
 
+    // Update UI hint showing selected side
     updateHint() {
       if (this.selectedHint) {
         this.selectedHint.innerHTML = `Playing as: <b>${this.selectedSide}</b>`;
       }
     }
 
+    // Display last 5 game results
     displayHistory() {
       if (!this.historyList) return;
 
@@ -51,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ).join('');
     }
 
+    // Handle form submit → go to game page
     initForm() {
       const ticForm = document.getElementById("ticForm");
       if (!ticForm) return;
@@ -68,18 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   class TicTacToe {
 
+    // All possible winning combinations
     static WIN_COMBOS = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+      [0, 4, 8], [2, 4, 6]  // diagonals
     ];
     constructor() {
 
       this.boardElement = document.getElementById("board");
+      if (!this.boardElement) return;
 
-      // DOM Elements
+      // UI Elements
       this.statusText = document.getElementById("status");
       this.scoreText = document.getElementById("score");
+
+      // Result modal
       this.resultModal = document.getElementById("resultModal");
       this.resultText = document.getElementById("resultText");
       this.resultStats = document.getElementById("resultStats");
@@ -95,9 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Game State
       this.userSymbol = sessionStorage.getItem("ticSide") || "X";
       this.computerSymbol = this.userSymbol === "X" ? "O" : "X";
-      this.cells = Array(9).fill("");
-      this.currentTurn = "";
+      this.cells = Array(9).fill(""); // board state
+      this.currentTurn = "";  // "Human" or "Computer"
 
+      // Close modal when clicking outside
       if (this.resultModal) {
         window.addEventListener("click", e => {
           if (e.target === this.resultModal) {
@@ -116,11 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
       this.boardElement.innerHTML = "";
       this.cellElements = [];
 
+      // Create 9 cells
       for (let i = 0; i < 9; i++) {
         const cell = document.createElement("div");
         cell.className = "cell";
         cell.setAttribute("role", "gridcell");
 
+        // Allow click only on player's turn
         cell.addEventListener("click", () => {
           if (this.currentTurn === "Human") this.playerMove(i);
         });
@@ -136,10 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
     init() {
       this.createBoard();
 
+      // Reset state
       this.cells = Array(9).fill("");
       if (this.resultModal) this.resultModal.style.display = "none";
       this.boardElement.style.pointerEvents = "auto";
 
+      // Load saved game or start new
       if (!this.loadGameState()) {
         const lastStarter = localStorage.getItem("lastStarter") || "Computer";
         this.currentTurn = lastStarter === "Human" ? "Computer" : "Human";
@@ -148,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         this.saveGameState();
         this.updateStatus();
 
+        // If computer starts, make first move
         if (this.currentTurn === "Computer") {
           setTimeout(() => this.executeComputerMove(), 600);
         }
@@ -156,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.updateScoreDisplay();
     }
 
-
+    // Save current game state
     saveGameState() {
       try {
         const state = {
@@ -168,6 +190,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Failed to save game state", e);
       }
     }
+
+    // Load saved game state
     loadGameState() {
       let state;
 
@@ -187,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.render();
       this.updateStatus();
 
+      // Resume computer move if needed
       if (!this.isGameOver() && this.currentTurn === "Computer") {
         setTimeout(() => this.executeComputerMove(), 600);
       }
@@ -196,19 +221,23 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================
         GAMEPLAY
     ========================= */
+    // Render board UI
     render() {
       this.cellElements.forEach((cell, i) => {
         cell.textContent = this.cells[i];
+
+        // Color X and O differently
         cell.style.color = this.cells[i] === "X" ? "#ef4444" : "#3b82f6";
       });
     }
 
-
+    // Update turn status text
     updateStatus() {
       if (this.isGameOver()) return;
       this.statusText.textContent = this.currentTurn === "Human" ? "Your Turn" : "Computer is thinking...";
     }
 
+    // Place symbol on board
     makeMove(i, symbol) {
       if (this.cells[i] !== "") return false;
 
@@ -222,47 +251,47 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================
      MOVES
  ========================= */
+    // Handle player move
     playerMove(i) {
       if (this.cells[i] !== "" || this.isGameOver() || this.currentTurn !== "Human") return;
 
-      // 1. Make the move
+      // Make the move
       this.makeMove(i, this.userSymbol);
 
-      // 2. Check for end
+      // Check for end
       if (this.checkWin(this.userSymbol)) return this.endGame("You Win!", true);
       if (this.cells.every(c => c !== "")) return this.endGame("It's a Draw!", null);
 
-      // 3. Switch turn and SAVE before computer moves
+      // Switch to computer
       this.currentTurn = "Computer";
       this.updateStatus();
       this.saveGameState();
 
-      // 4. Trigger computer
+      // Computer plays
       setTimeout(() => this.executeComputerMove(), 600);
     }
 
+    // Computer move
     executeComputerMove() {
       if (this.isGameOver() || this.currentTurn !== "Computer") return;
 
       const moveIndex = this.calculateBestMove();
       if (moveIndex === null) return;
 
-      // 1. Make the move
+      // Make the move
       this.makeMove(moveIndex, this.computerSymbol);
 
-      // 2. Check for end
+      // Check for end
       if (this.checkWin(this.computerSymbol)) return this.endGame("Computer Wins!", false);
       if (this.cells.every(c => c !== "")) return this.endGame("It's a Draw!", null);
 
-      // 3. Switch back to human and SAVE
+      // Switch back to human and SAVE
       this.currentTurn = "Human";
       this.updateStatus();
       this.saveGameState();
     }
 
-    /* =========================
-        LOGIC & AI
-    ========================= */
+    // Check if a player has won
     checkWin(player) {
       // Loop over each winning combination
       for (let i = 0; i < TicTacToe.WIN_COMBOS.length; i++) {
@@ -279,16 +308,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return false; // no winning combo found
     }
 
+    // Check if a player has won
     isGameOver() {
       return this.checkWin(this.userSymbol) || this.checkWin(this.computerSymbol) || this.cells.every(c => c !== "");
     }
 
+    // Simple Computer: win → block → random
     calculateBestMove() {
       return this.findWinningMove(this.computerSymbol) ??
         this.findWinningMove(this.userSymbol) ??
         this.randomMove();
     }
 
+    // Find winning/blocking move
     findWinningMove(player) {
       // Loop over each winning combination
       for (let i = 0; i < TicTacToe.WIN_COMBOS.length; i++) {
@@ -313,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return null; // no winning move found
     }
 
+    // Pick random empty cell
     randomMove() {
       // Create an array to hold empty cell indexes
       let empty = [];
@@ -340,10 +373,14 @@ document.addEventListener("DOMContentLoaded", () => {
     endGame(msg, playerWon) {
       this.statusText.textContent = msg;
       this.boardElement.style.pointerEvents = "none";
+
+      // Clear saved state
       sessionStorage.removeItem("ticState");
 
-      // Update Local Stats
+      // Load stats
       const stats = JSON.parse(localStorage.getItem("ticStats")) || { win: 0, lose: 0, draw: 0, played: 0 };
+
+      // Update stats
       if (playerWon === true) {
         stats.win++;
         this.playSound(this.sounds.win);
@@ -357,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
       stats.played++;
       localStorage.setItem("ticStats", JSON.stringify(stats));
 
-      // Update History
+      // Save history (last 5)
       let history = [];
       try {
         history = JSON.parse(localStorage.getItem("ticHistory")) || [];
@@ -372,28 +409,38 @@ document.addEventListener("DOMContentLoaded", () => {
       this.showModal(msg, playerWon, stats);
     }
 
-    formatStats(stats) {
-  const winRate =
-    stats.played === 0
-      ? 0
-      : ((stats.win / stats.played) * 100).toFixed(1);
+    // Format stats text
+    formatStats(stats, multiline = false) {
+      const winRate =
+        stats.played === 0
+          ? 0
+          : ((stats.win / stats.played) * 100).toFixed(1);
 
-  return `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
-}
+      if (multiline) {
+        return `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw}<br>Win Rate: ${winRate}%`;
+      }
 
+      return `Wins: ${stats.win} | Losses: ${stats.lose} | Draws: ${stats.draw} | Win Rate: ${winRate}%`;
+    }
+
+    // Show result modal
     showModal(msg, playerWon, stats) {
       this.resultText.textContent = msg;
+
+      // Color based on result
       this.resultText.style.color = playerWon === true ? "#22c55e" : playerWon === false ? "#ef4444" : "#f59e0b";
 
-      this.resultStats.textContent = this.formatStats(stats);
+      this.resultStats.innerHTML = this.formatStats(stats, true);
 
       this.resultModal.style.display = "flex";
     }
 
+    // Update score display
     updateScoreDisplay(stats = JSON.parse(localStorage.getItem("ticStats")) || { win: 0, lose: 0, draw: 0, played: 0 }) {
       this.scoreText.textContent = this.formatStats(stats);
     }
 
+    // Play audio safely
     playSound(sound) {
       if (sound) {
         sound.currentTime = 0;
@@ -401,12 +448,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    // Restart game
     reset() {
       sessionStorage.removeItem("ticState");
       if (this.resultModal) this.resultModal.style.display = "none";
       this.init();
     }
 
+    // Go back to menu
     goToMenu() {
       sessionStorage.removeItem("ticState");
       window.location.replace("tic.html");
@@ -416,14 +465,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =================================
        INITIALIZATION
        ================================= */
+
+  // Menu page
   if (document.getElementById("ticForm")) {
     new TicMenu();
   }
 
+  // Game page
   if (document.getElementById("board")) {
     const game = new TicTacToe();
     game.init();
 
+    // Expose for buttons
     window.reset = () => game.reset();
     window.goToMenu = () => game.goToMenu();
   }
