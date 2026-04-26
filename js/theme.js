@@ -137,7 +137,7 @@ function initVolume() {
 
   // Load saved volume or default
   const savedVolume = localStorage.getItem("volume");
-  const volume = savedVolume !== null ? parseFloat(savedVolume) : 0.2;
+  const volume = savedVolume !== null ? parseFloat(savedVolume) : 1.0;
 
   bgm.volume = volume;
 
