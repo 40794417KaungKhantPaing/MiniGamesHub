@@ -74,24 +74,31 @@ function initBGM() {
 
   if (!bgm) return;
 
-  const muted = localStorage.getItem("bgmMuted") === "true";
+  let muted = localStorage.getItem("bgmMuted");
+
+  if (muted === null) {
+    muted = true; // default state
+    localStorage.setItem("bgmMuted", "true");
+  } else {
+    muted = muted === "true";
+  }
 
   bgm.muted = muted;
   updateBgmIcons(muted);
 
   // Auto-play if not muted (browser may block autoplay)
   if (!muted) {
-    bgm.play().catch(() => {});
+    bgm.play().catch(() => { });
   }
 
   // Expose toggle globally for button usage
   window.toggleBgm = function () {
     bgm.muted = !bgm.muted;
 
-    localStorage.setItem("bgmMuted", bgm.muted);
+    localStorage.setItem("bgmMuted", String(bgm.muted));
 
     if (!bgm.muted) {
-      bgm.play().catch(() => {});
+      bgm.play().catch(() => { });
     }
 
     updateBgmIcons(bgm.muted);
@@ -105,6 +112,18 @@ function initBGM() {
         : "fa-solid fa-volume-high";
     });
   }
+  window.addEventListener("pageshow", () => {
+    const muted = localStorage.getItem("bgmMuted") === "true";
+
+    if (bgm.muted !== muted) {
+      bgm.muted = muted;
+      updateBgmIcons(muted);
+
+      if (!muted) {
+        bgm.play().catch(() => { });
+      }
+    }
+  });
 }
 
 // =========================
