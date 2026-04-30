@@ -175,7 +175,7 @@
     text-align: center;
     width: 320px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    color: var(--text);
+    color: white;
     animation: reset-pop 0.25s ease;
 }
 
