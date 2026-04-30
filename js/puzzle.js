@@ -187,7 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const emptyRow = Math.floor(this.tiles.indexOf(null) / this.size);
       const fromBottom = this.size - emptyRow;
 
-      return (count + fromBottom) % 2 === 0;
+      // If blank is on even row from bottom
+      if (fromBottom % 2 === 0) {
+        return count % 2 === 1; // inversions must be odd
+      } else {
+        return count % 2 === 0; // inversions must be even
+      }
     }
 
     /* =========================
